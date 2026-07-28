@@ -1,0 +1,346 @@
+/* ============================================================
+   BLOQUE 1: PERFIL DE USUARIO
+   ============================================================ */
+#perfil-usuario {
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* ============================================================
+   BLOQUE 2: TARJETA DE PERFIL
+   ============================================================ */
+.tarjeta-perfil {
+    background-color: white;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.banner-perfil {
+    height: 120px;
+    background: linear-gradient(90deg, #3a4e7a, #5e83ba);
+}
+
+.perfil-info {
+    padding: 20px;
+    position: relative;
+}
+
+.perfil-info img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 5px solid white;
+    position: absolute;
+    top: -50px;
+    left: 20px;
+    background-color: white;
+    object-fit: cover;
+}
+
+.btn-editar {
+    float: right;
+    background-color: #3a4e7a;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 13px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn-editar:hover {
+    background-color: #091d36;
+}
+
+/* ============================================================
+   BLOQUE 3: INFORMACIÓN GENERAL DEL PERFIL
+   ============================================================ */
+.info-general {
+    margin-top: 55px;
+}
+
+.info-general h1 {
+    margin: 0;
+    color: #091d36;
+    font-size: 22px;
+    text-align: left;
+}
+
+.info-general .usuario {
+    margin-top: 3px;
+    color: #5e83ba;
+    font-size: 16px;
+}
+
+.info-general .bio {
+    margin-top: 15px;
+    color: #3a4e7a;
+    line-height: 24px;
+    font-size: 14px;
+}
+
+.info-enlaces {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 15px;
+    color: #5e83ba;
+    font-size: 13px;
+}
+
+.info-seguimiento {
+    display: flex;
+    gap: 40px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #c2d2e9;
+}
+
+.stat,
+.stat-label {
+    text-align: center;
+    color: #5e83ba;
+    font-size: 12px;
+}
+
+.stat-valor {
+    font-size: 18px;
+    color: #091d36;
+    font-weight: bold;
+}
+
+/* ============================================================
+   BLOQUE 4: PUBLICACIONES DEL PERFIL
+   ============================================================ */
+.publicaciones-perfil {
+    width: 100%;
+    margin: 20px auto;
+    background-color: white;
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.publicaciones-perfil h2 {
+    color: #091d36;
+    margin-top: 0;
+    font-size: 20px;
+}
+
+.post {
+    margin-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #c2d2e9;
+}
+
+.post p {
+    color: #3a4e7a;
+    line-height: 24px;
+    font-size: 14px;
+}
+
+.post-versiculo {
+    background-color: #c2d2e9;
+    border-left: 5px solid #3a4e7a;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 15px;
+}
+
+.post-versiculo p {
+    font-style: italic;
+    color: #091d36;
+    line-height: 26px;
+    margin-top: 0;
+    font-size: 14px;
+}
+
+.post-versiculo .referencia {
+    color: #3a4e7a;
+    font-weight: 600;
+    margin-top: 8px;
+}
+
+.acciones-post {
+    display: flex;
+    gap: 20px;
+    margin-top: 15px;
+    color: #5e83ba;
+    font-size: 14px;
+}
+
+.acciones-post div {
+    cursor: pointer;
+}
+
+.acciones-post div:hover {
+    color: #091d36;
+}
+
+/* ============================================================
+   BLOQUE 5: GALERÍA DE FOTOS
+   ============================================================ */
+#galeria-fotos {
+    width: 100%;
+    margin: 20px auto;
+    text-align: center;
+}
+
+#galeria-fotos h2 {
+    margin-bottom: 15px;
+    color: #0f2b50;
+    text-align: left;
+    font-size: 20px;
+}
+
+.galeria .col {
+    display: flex;
+    padding: 8px;
+}
+
+.galeria img {
+    width: 100%;
+    height: 200px;
+    border-radius: 12px;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.galeria img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ============================================================
+   MEDIA QUERIES
+   ============================================================ */
+
+/* Tablets y pantallas medianas */
+@media (min-width: 768px) {
+    .banner-perfil {
+        height: 180px;
+    }
+    
+    .perfil-info {
+        padding: 25px;
+    }
+    
+    .perfil-info img {
+        width: 130px;
+        height: 130px;
+        top: -65px;
+        left: 25px;
+    }
+    
+    .btn-editar {
+        padding: 12px 25px;
+        font-size: 15px;
+    }
+    
+    .info-general {
+        margin-top: 70px;
+    }
+    
+    .info-general h1 {
+        font-size: 26px;
+    }
+    
+    .info-general .usuario {
+        font-size: 18px;
+    }
+    
+    .info-general .bio {
+        font-size: 15px;
+        line-height: 28px;
+    }
+    
+    .info-enlaces {
+        font-size: 14px;
+        gap: 30px;
+    }
+    
+    .info-seguimiento {
+        gap: 60px;
+        padding-top: 25px;
+    }
+    
+    .stat,
+    .stat-label {
+        font-size: 14px;
+    }
+    
+    .stat-valor {
+        font-size: 20px;
+    }
+    
+    .publicaciones-perfil {
+        padding: 25px;
+        margin: 30px auto;
+    }
+    
+    .publicaciones-perfil h2 {
+        font-size: 24px;
+    }
+    
+    .post {
+        margin-top: 25px;
+        padding-bottom: 25px;
+    }
+    
+    .post p {
+        font-size: 15px;
+        line-height: 28px;
+    }
+    
+    .post-versiculo {
+        padding: 20px;
+    }
+    
+    .post-versiculo p {
+        line-height: 30px;
+        font-size: 15px;
+    }
+    
+    .acciones-post {
+        gap: 25px;
+        font-size: 15px;
+    }
+    
+    #galeria-fotos {
+        margin: 30px auto;
+    }
+    
+    #galeria-fotos h2 {
+        font-size: 24px;
+    }
+    
+    .galeria .col {
+        padding: 10px;
+    }
+    
+    .galeria img {
+        height: 300px;
+    }
+}
+
+/* Escritorio y pantallas grandes */
+@media (min-width: 992px) {
+    .banner-perfil {
+        height: 200px;
+    }
+    
+    .perfil-info img {
+        width: 150px;
+        height: 150px;
+        top: -75px;
+        left: 30px;
+    }
+    
+    .galeria img {
+        height: 500px;
+    }
+}

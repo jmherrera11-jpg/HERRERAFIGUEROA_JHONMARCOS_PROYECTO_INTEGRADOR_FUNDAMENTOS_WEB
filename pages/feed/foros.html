@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foros - Daat Devotional</title>
+    <link rel="icon" href="../../imagenes/foro.ico" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../css/general.css">
+    <link rel="stylesheet" href="../../css/foros.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <nav>
+        <div class="nav-logo">
+            <img src="../../imagenes/LogoPrincipal.png" alt="Logo">
+            <p>Daat Devotional</p>
+        </div>
+        <div class="nav-links">
+            <button type="button" class="btn btn-light"><a href="inicio.html"><i class="fa-solid fa-house"></i>
+                    Inicio</a></button>
+            <button type="button" class="btn btn-light"><a href="grupos.html"><i class="fa-solid fa-users"></i>
+                    Grupos</a></button>
+            <button type="button" class="btn btn-light"><a href="foros.html"><i class="fa-solid fa-comments"></i>
+                    Foros</a></button>
+            <button type="button" class="btn btn-light"><a href="chat.html"><i class="fa-solid fa-comment-dots"></i>
+                    Chat</a></button>
+        </div>
+        <div class="nav-usuario">
+            <button type="button" class="btn btn-light">
+                <a href="../usuario/perfil.html">
+                    <i class="fa-solid fa-user"></i> jhon32
+                </a>
+            </button>
+            <button type="button" class="btn btn-light">
+                <a href="../../index.html" class="nav-salir">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                </a>
+            </button>
+        </div>
+    </nav>
+
+    <main>
+        <section id="lista-temas">
+            <div class="titulo-seccion">
+                <h1>Foros de Discusión</h1>
+                <button class="btn-nuevo">+ Nuevo Tema</button>
+            </div>
+
+            <div class="buscador">
+                <input type="text" placeholder="Buscar temas de discusión...">
+                <div class="menu-filtro">
+                    <button class="btn-activo">Todos</button>
+                    <button class="btn-inactivo">Antiguo Testamento</button>
+                    <button class="btn-inactivo">Nuevo Testamento</button>
+                    <button class="btn-inactivo">Teología</button>
+                    <button class="btn-inactivo">Vida Cristiana</button>
+                    <button class="btn-inactivo">Preguntas</button>
+                    <button class="btn-inactivo">Recursos</button>
+                </div>
+            </div>
+
+            <article class="card w-80 mb-3">
+                <img src="../../imagenes/Perfil.png" alt="Perfil">
+                <div class="card-body">
+                    <div class="etiquetas">
+                        <button class="btn-etiqueta">Destacado</button>
+                        <button class="btn-etiqueta">Nuevo Testamento</button>
+                    </div>
+                    <h2 class="card-title">¿Cómo interpretar las parábolas de Jesús correctamente?</h2>
+                    <p class="card-text">He estado estudiando las parábolas y me pregunto cuál es el mejor método
+                        hermenéutico para interpretarlas sin forzar el texto...</p>
+                    <div class="tema-meta">Carlos Méndez | 23 respuestas | 156 vistas | Hace 2 horas</div>
+                </div>
+            </article>
+
+            <article class="card w-80 mb-3">
+                <img src="../../imagenes/Perfil.png" alt="Perfil">
+                <div class="card-contenido">
+                    <div class="etiquetas">
+                        <button class="btn-etiqueta">Destacado</button>
+                        <button class="btn-etiqueta">Teología</button>
+                    </div>
+                    <h2 class="card-title">La Trinidad: Fundamentos bíblicos</h2>
+                    <p class="card-text">¿Cuáles son los pasajes más claros que explican la doctrina de la Trinidad? Me
+                        gustaría profundizar en este tema.</p>
+                    <div class="tema-meta">Ana Martínez | 31 respuestas | 412 vistas | Hace 1 día</div>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Daat Devotional - Todos los derechos reservados</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

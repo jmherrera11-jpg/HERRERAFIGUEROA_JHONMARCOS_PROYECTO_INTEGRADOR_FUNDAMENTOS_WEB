@@ -1,0 +1,212 @@
+[
+  {
+    "id": 1,
+    "nombre": "Nuevo Testamento",
+    "descripcion": "Estudios y reflexiones basados en los libros del Nuevo Testamento",
+    "icono": "fa-bible",
+    "color": "#2E86AB"
+  },
+  {
+    "id": 2,
+    "nombre": "Antiguo Testamento",
+    "descripcion": "Profundizando en los libros del Antiguo Testamento y su relevancia hoy",
+    "icono": "fa-scroll",
+    "color": "#A23B72"
+  },
+  {
+    "id": 3,
+    "nombre": "Teología",
+    "descripcion": "Estudio sistemático de las doctrinas cristianas",
+    "icono": "fa-cross",
+    "color": "#F18F01"
+  },
+  {
+    "id": 4,
+    "nombre": "Vida Cristiana",
+    "descripcion": "Aplicación práctica de la fe en la vida diaria",
+    "icono": "fa-hands-praying",
+    "color": "#4C9F70"
+  },
+  {
+    "id": 5,
+    "nombre": "Devocional",
+    "descripcion": "Reflexiones diarias para el crecimiento espiritual",
+    "icono": "fa-sun",
+    "color": "#D64933"
+  },
+  {
+    "id": 6,
+    "nombre": "Adoración",
+    "descripcion": "Temas relacionados con la alabanza y adoración a Dios",
+    "icono": "fa-music",
+    "color": "#7B2CBF"
+  },
+  {
+    "id": 7,
+    "nombre": "Misiones",
+    "descripcion": "Compartiendo el evangelio en todo el mundo",
+    "icono": "fa-globe-americas",
+    "color": "#FF6B35"
+  },
+  {
+    "id": 8,
+    "nombre": "Familia",
+    "descripcion": "Consejos y reflexiones para la familia cristiana",
+    "icono": "fa-people-group",
+    "color": "#F7C59F"
+  },
+  {
+    "id": 9,
+    "nombre": "Jóvenes",
+    "descripcion": "Contenido especial para la juventud cristiana",
+    "icono": "fa-fire",
+    "color": "#EF476F"
+  },
+  {
+    "id": 10,
+    "nombre": "Profecía",
+    "descripcion": "Estudio de las profecías bíblicas",
+    "icono": "fa-eye",
+    "color": "#118AB2"
+  },
+  {
+    "id": 11,
+    "nombre": "Apologética",
+    "descripcion": "Defensa razonada de la fe cristiana",
+    "icono": "fa-shield-halved",
+    "color": "#06D6A0"
+  },
+  {
+    "id": 12,
+    "nombre": "Historia",
+    "descripcion": "Historia de la iglesia y del pueblo de Dios",
+    "icono": "fa-clock-rotate-left",
+    "color": "#9C89B8"
+  },
+  {
+    "id": 13,
+    "nombre": "Liderazgo",
+    "descripcion": "Principios bíblicos para el liderazgo cristiano",
+    "icono": "fa-crown",
+    "color": "#F4A261"
+  },
+  {
+    "id": 14,
+    "nombre": "Sanidad",
+    "descripcion": "La sanidad divina y el cuidado de la salud",
+    "icono": "fa-heart-pulse",
+    "color": "#E63946"
+  },
+  {
+    "id": 15,
+    "nombre": "Oración",
+    "descripcion": "Profundizando en la oración y la intercesión",
+    "icono": "fa-hand-sparkles",
+    "color": "#457B9D"
+  },
+  {
+    "id": 16,
+    "nombre": "Discipulado",
+    "descripcion": "Formación de discípulos de Cristo",
+    "icono": "fa-user-graduate",
+    "color": "#2A9D8F"
+  },
+  {
+    "id": 17,
+    "nombre": "Evangelismo",
+    "descripcion": "Estrategias y reflexiones sobre el evangelismo",
+    "icono": "fa-bullhorn",
+    "color": "#E76F51"
+  },
+  {
+    "id": 18,
+    "nombre": "Salmos",
+    "descripcion": "Estudio del libro de los Salmos",
+    "icono": "fa-book-open",
+    "color": "#264653"
+  },
+  {
+    "id": 19,
+    "nombre": "Proverbios",
+    "descripcion": "Sabiduría práctica del libro de Proverbios",
+    "icono": "fa-lightbulb",
+    "color": "#F4A261"
+  },
+  {
+    "id": 20,
+    "nombre": "Profetas",
+    "descripcion": "Estudio de los libros proféticos",
+    "icono": "fa-voicemail",
+    "color": "#E9C46A"
+  },
+  {
+    "id": 21,
+    "nombre": "Evangelios",
+    "descripcion": "Vida y enseñanzas de Jesús en los Evangelios",
+    "icono": "fa-church",
+    "color": "#2B2D42"
+  },
+  {
+    "id": 22,
+    "nombre": "Cartas Paulinas",
+    "descripcion": "Las epístolas del apóstol Pablo",
+    "icono": "fa-envelope",
+    "color": "#8D99AE"
+  },
+  {
+    "id": 23,
+    "nombre": "Apocalipsis",
+    "descripcion": "El libro de la revelación de Jesucristo",
+    "icono": "fa-cloud",
+    "color": "#EF233C"
+  },
+  {
+    "id": 24,
+    "nombre": "Espíritu Santo",
+    "descripcion": "La persona y obra del Espíritu Santo",
+    "icono": "fa-dove",
+    "color": "#7B2CBF"
+  },
+  {
+    "id": 25,
+    "nombre": "Gracia",
+    "descripcion": "La gracia salvadora de Dios",
+    "icono": "fa-hand-holding-heart",
+    "color": "#2E86AB"
+  },
+  {
+    "id": 26,
+    "nombre": "Fe",
+    "descripcion": "La fe cristiana y su aplicación práctica",
+    "icono": "fa-anchor",
+    "color": "#06D6A0"
+  },
+  {
+    "id": 27,
+    "nombre": "Esperanza",
+    "descripcion": "La esperanza cristiana en tiempos difíciles",
+    "icono": "fa-star",
+    "color": "#F18F01"
+  },
+  {
+    "id": 28,
+    "nombre": "Amor",
+    "descripcion": "El amor de Dios y el amor al prójimo",
+    "icono": "fa-heart",
+    "color": "#E63946"
+  },
+  {
+    "id": 29,
+    "nombre": "Restauración",
+    "descripcion": "Dios restaura vidas y relaciones",
+    "icono": "fa-arrows-rotate",
+    "color": "#4C9F70"
+  },
+  {
+    "id": 30,
+    "nombre": "Nueva Creación",
+    "descripcion": "Vida nueva en Cristo",
+    "icono": "fa-sunrise",
+    "color": "#F4A261"
+  }
+]

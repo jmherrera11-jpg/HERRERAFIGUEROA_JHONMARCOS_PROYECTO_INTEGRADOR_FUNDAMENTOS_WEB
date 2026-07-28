@@ -1,0 +1,245 @@
+/* ============================================================
+   BLOQUE 1: CONTENEDOR PRINCIPAL DEL FEED
+   ============================================================ */
+#container {
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* ============================================================
+   BLOQUE 2: SECCIÓN DE PUBLICAR
+   ============================================================ */
+.publicar {
+    background: #f9fbff;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
+    display: flex;
+    gap: 15px;
+}
+
+.publicar-form textarea {
+    width: 100%;
+    height: 80px;
+    border: 1px solid #c2d2e9;
+    border-radius: 10px;
+    padding: 15px;
+    font-family: Poppins, sans-serif;
+}
+
+.publicar-form input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #c2d2e9;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.publicar img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.publicar-form {
+    flex: 1;
+}
+
+.boton-publicar {
+    text-align: right;
+    margin-top: 10px;
+}
+
+.boton-publicar button {
+    background: #314d83;
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.boton-publicar button:hover {
+    background: #091d36;
+}
+
+/* ============================================================
+   BLOQUE 3: PUBLICACIONES
+   ============================================================ */
+.publicacion {
+    background: #f9fbff;
+    border-radius: 15px;
+    padding: 25px;
+    margin-top: 30px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
+}
+
+.publicacion-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.publicacion-header img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.publicacion-autor strong {
+    color: #091d36;
+    font-size: 16px;
+}
+
+.publicacion-fecha {
+    color: #5e83ba;
+    font-size: 12px;
+}
+
+.publicacion p {
+    color: #091d36;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+.versiculo {
+    background: #dce7f7;
+    padding: 20px;
+    border-left: 5px solid #314d83;
+    border-radius: 8px;
+    color: #091d36;
+    margin-top: 15px;
+}
+
+.referencia {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.acciones {
+    display: flex;
+    gap: 25px;
+    margin-top: 20px;
+    color: #5e83ba;
+}
+
+.acciones div {
+    cursor: pointer;
+}
+
+.acciones div:hover {
+    color: #091d36;
+}
+
+#carouselExample img, video{
+    width: 50%;
+    height: 600px;
+    border-radius: 12px;
+}
+
+/* Tablets y pantallas medianas */
+@media (min-width: 768px) {
+    .container {
+        padding: 0 20px;
+    }
+    
+    .publicar {
+        flex-direction: row;
+        padding: 25px;
+        gap: 15px;
+    }
+    
+    .publicar img {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .publicar-form textarea {
+        height: 80px;
+        padding: 15px;
+        font-size: 15px;
+    }
+    
+    .publicar-form input {
+        padding: 12px;
+        font-size: 15px;
+    }
+    
+    .boton-publicar button {
+        padding: 12px 28px;
+        font-size: 15px;
+    }
+    
+    .publicacion {
+        padding: 25px;
+        margin-top: 30px;
+    }
+    
+    .publicacion-header img {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .publicacion-autor strong {
+        font-size: 16px;
+    }
+    
+    .publicacion-fecha {
+        font-size: 12px;
+    }
+    
+    .publicacion p {
+        font-size: 15px;
+    }
+    
+    .versiculo {
+        padding: 20px;
+        font-size: 15px;
+    }
+    
+    .acciones {
+        gap: 25px;
+        font-size: 15px;
+    }
+    
+    #carouselExample {
+        padding: 25px;
+        margin-top: 30px;
+    }
+    
+    #carouselExample img,
+    #carouselExample video {
+        max-height: 400px;
+    }
+}
+
+/* Escritorio y pantallas grandes */
+@media (min-width: 992px) {
+    .container {
+        padding: 0 30px;
+    }
+    
+    .publicar {
+        padding: 30px;
+    }
+    
+    .publicar img {
+        width: 70px;
+        height: 70px;
+    }
+    
+    #carouselExample img,
+    #carouselExample video {
+        max-height: 600px;
+    }
+    
+    .publicacion {
+        padding: 30px;
+    }
+    
+    .versiculo {
+        padding: 25px;
+        font-size: 16px;
+    }
+}

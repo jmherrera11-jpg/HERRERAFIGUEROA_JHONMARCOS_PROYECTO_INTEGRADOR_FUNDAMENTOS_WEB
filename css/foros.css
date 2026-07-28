@@ -1,0 +1,235 @@
+/* ============================================================
+   BLOQUE 1: CONTENEDOR PRINCIPAL DE FOROS
+   ============================================================ */
+#lista-temas {
+    width: 100%;
+    margin: 0;
+}
+
+/* ============================================================
+   BLOQUE 2: TÍTULO Y BOTONES
+   ============================================================ */
+.titulo-seccion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.titulo-seccion h1 {
+    color: #0f2b50;
+    font-size: 26px;
+    text-align: center;
+    margin: 0;
+}
+
+.btn-nuevo {
+    background: #324d82;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 200px;
+}
+
+.btn-nuevo:hover {
+    background: #091d36;
+}
+
+/* ============================================================
+   BLOQUE 3: BUSCADOR Y FILTROS
+   ============================================================ */
+.buscador {
+    background: white;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
+}
+
+.buscador input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #c8d2e2;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.menu-filtro {
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.menu-filtro button {
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.menu-filtro button:hover {
+    background: #3a4e7a;
+    color: white;
+}
+
+.btn-activo {
+    background: #324d82;
+    color: white;
+}
+
+.btn-inactivo {
+    background: #dbe6f5;
+    color: #1f2d4d;
+}
+
+/* ============================================================
+   BLOQUE 4: TEMAS DEL FORO 
+   ============================================================ */
+.card {
+    background: white;
+    border: 2px solid #5b7db6;
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+}
+
+.card img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.card-body, .card-contenido {
+    flex: 1;
+    width: 100%;
+}
+
+.etiquetas {
+    margin-bottom: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+}
+
+.btn-etiqueta {
+    background: #dbe6f5;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.card-body h2, .card-contenido h2 {
+    color: #0f2b50;
+    font-size: 16px;
+    margin: 8px 0;
+}
+
+.card-body p, .card-contenido p {
+    color: #4d5d78;
+    font-size: 13px;
+    margin: 8px 0;
+}
+
+.tema-meta {
+    color: #5a78a5;
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+/* ============================================================
+   MEDIA QUERIES 
+   ============================================================ */
+
+/* Tablets y pantallas medianas */
+@media (min-width: 768px) {
+    .titulo-seccion {
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 30px;
+    }
+    
+    .titulo-seccion h1 {
+        font-size: 32px;
+        text-align: left;
+    }
+    
+    .btn-nuevo {
+        width: auto;
+        padding: 15px 25px;
+        font-size: 16px;
+    }
+    
+    .buscador {
+        padding: 25px;
+        border-radius: 18px;
+    }
+    
+    .buscador input {
+        padding: 15px;
+        font-size: 16px;
+    }
+    
+    .menu-filtro button {
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+    
+    .card {
+        flex-direction: row;
+        text-align: left;
+        padding: 25px;
+        border-radius: 18px;
+        gap: 15px;
+    }
+    
+    .card img {
+        width: 55px;
+        height: 55px;
+    }
+    
+    .etiquetas {
+        justify-content: flex-start;
+    }
+    
+    .card-body h2, .card-contenido h2 {
+        font-size: 18px;
+    }
+    
+    .card-body p, .card-contenido p {
+        font-size: 14px;
+    }
+    
+    .tema-meta {
+        font-size: 13px;
+    }
+}
+
+/* Escritorio y pantallas grandes */
+@media (min-width: 992px) {
+    .titulo-seccion h1 {
+        font-size: 32px;
+    }
+    
+    .card {
+        padding: 25px;
+    }
+    
+    .btn-etiqueta {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+}

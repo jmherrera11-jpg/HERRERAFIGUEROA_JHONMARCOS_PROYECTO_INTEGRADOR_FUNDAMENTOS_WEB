@@ -1,0 +1,320 @@
+/* ============================================================
+   BLOQUE 1: PRESENTACIÓN PRINCIPAL
+   ============================================================ */
+#presentacion {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+#bienvenida {
+    background-color: #c2d2e9;
+}
+
+.logo-principal img {
+    border-radius: 30px;
+    height: 120px;
+    width: 160px;
+}
+
+.titulo-principal {
+    font-size: 32px;
+    color: #091d36;
+    margin-top: 10px;
+}
+
+.subtitulo-principal {
+    color: #3a4e7a;
+    font-size: 16px;
+    margin-top: 10px;
+    padding: 0 15px;
+}
+
+.botones {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.btn-login, .btn-registro {
+    display: inline-block;
+    width: 200px;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    border-radius: 10px;
+    font-family: Poppins, sans-serif;
+    font-size: 15px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.btn-login {
+    background-color: #3a4e7a;
+    color: #f1f1f0;
+    border: 1px solid #091d36;
+}
+
+.btn-login:hover {
+    background-color: #091d36;
+    transform: scale(1.08);
+    color: #f1f1f0;
+}
+
+.btn-registro {
+    background-color: #f1f1f0;
+    color: #091d36;
+    border: 1px solid #091d36;
+}
+
+.btn-registro:hover {
+    background-color: #c2d2e9;
+    transform: scale(1.08);
+    color: #091d36;
+}
+
+/* ============================================================
+   BLOQUE 2: TARJETAS DE SERVICIOS 
+   ============================================================ */
+#tarjetas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.card-body {
+    width: 100%;
+    max-width: 350px;
+    padding: 25px 20px;
+    text-align: center;
+    background-color: #f1f1f0;
+    border-radius: 20px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(58, 78, 122, 0.2);
+}
+
+.card-body:hover {
+    transform: translateY(-8px);
+    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.15);
+    border-color: #3a4e7a;
+}
+
+.card-body img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-body h2 {
+    color: #091d36;
+    font-size: 18px;
+    margin: 15px 0 10px;
+}
+
+.card-body p {
+    color: #3a4e7a;
+    padding: 0 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* ============================================================
+   BLOQUE 3: PREGUNTAS FRECUENTES 
+   ============================================================ */
+#preguntas-frecuentes {
+    text-align: left;
+    margin: 20px auto;
+    background-color: #f1f1f0;
+    border-radius: 20px;
+    padding: 20px 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+#accordion-item button {
+    font-weight: bold;
+    color: #0f2b50;
+    background-color: #f8f9fc;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 10px 15px;
+}
+
+#accordion-item {
+    margin-top: 12px;
+    padding: 10px 15px;
+    background-color: #f8f9fc;
+    border-radius: 12px;
+    border-left: 4px solid #3a4e7a;
+}
+
+.accordion-body {
+    margin-top: 10px;
+    padding-left: 15px;
+    color: #4d5d78;
+    font-size: 14px;
+}
+
+/* ============================================================
+   BLOQUE 4: ESTADÍSTICAS
+   ============================================================ */
+#estadisticas {
+    text-align: center;
+    margin: 20px auto;
+    background: linear-gradient(135deg, #f1f1f0 0%, #e8ecf2 100%);
+    padding: 25px 15px;
+    border-radius: 20px;
+}
+
+#estadisticas h2 {
+    margin-bottom: 20px;
+    color: #0f2b50;
+    font-size: 22px;
+}
+
+#estadisticas progress, #estadisticas meter {
+    width: 100%;
+    height: 12px;
+    border-radius: 12px;
+}
+
+#estadisticas progress::-webkit-progress-bar {
+    background-color: #e0e5ec;
+    border-radius: 12px;
+}
+
+#estadisticas progress::-webkit-progress-value {
+    background-color: #3a4e7a;
+    border-radius: 12px;
+}
+
+#estadisticas meter::-webkit-meter-bar {
+    background-color: #e0e5ec;
+    border-radius: 12px;
+}
+
+#estadisticas meter::-webkit-meter-optimum-value {
+    background-color: #27ae60;
+    border-radius: 12px;
+}
+
+#estadisticas p {
+    margin: 15px 0 8px;
+    font-weight: 500;
+    color: #0f2b50;
+    font-size: 14px;
+}
+
+.grupo-estadisticas {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.item-estadistica {
+    width: 100%;
+    background-color: white;
+    padding: 15px;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.separador {
+    margin: 30px 0;
+}
+
+/* ============================================================
+   MEDIA QUERIES
+   ============================================================ */
+
+/* Tablets y pantallas medianas */
+@media (min-width: 768px) {
+    .titulo-principal {
+        font-size: 42px;
+    }
+    
+    .subtitulo-principal {
+        font-size: 18px;
+    }
+    
+    .botones {
+        flex-direction: row;
+        justify-content: center;
+        gap: 20px;
+    }
+    
+    .btn-login, .btn-registro {
+        width: 150px;
+    }
+    
+    #tarjetas {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 25px;
+    }
+    
+    .card-body {
+        width: calc(50% - 25px);
+        max-width: 300px;
+    }
+    
+    .grupo-estadisticas {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
+    
+    .item-estadistica {
+        width: calc(50% - 20px);
+        max-width: 300px;
+    }
+}
+
+/* Escritorio y pantallas grandes */
+@media (min-width: 992px) {
+    .titulo-principal {
+        font-size: 50px;
+    }
+    
+    .subtitulo-principal {
+        font-size: 20px;
+    }
+    
+    .logo-principal img {
+        height: 150px;
+        width: 200px;
+    }
+    
+    #tarjetas {
+        gap: 30px;
+    }
+    
+    .card-body {
+        width: calc(33.33% - 30px);
+        max-width: 350px;
+        padding: 35px 25px;
+    }
+    
+    .card-body h2 {
+        font-size: 20px;
+    }
+    
+    .item-estadistica {
+        width: calc(33.33% - 20px);
+    }
+    
+    #preguntas-frecuentes {
+        padding: 30px 40px;
+    }
+}
