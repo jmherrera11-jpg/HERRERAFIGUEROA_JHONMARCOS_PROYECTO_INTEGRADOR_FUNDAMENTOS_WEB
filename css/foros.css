@@ -14,19 +14,19 @@
     flex-direction: column;
     align-items: center;
     gap: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .titulo-seccion h1 {
-    color: #0f2b50;
+    color: var(--color-text);
     font-size: 26px;
     text-align: center;
     margin: 0;
 }
 
 .btn-nuevo {
-    background: #324d82;
-    color: white;
+    background: var(--color-primary);
+    color: var(--color-white);
     border: none;
     padding: 12px 20px;
     border-radius: 10px;
@@ -34,28 +34,36 @@
     cursor: pointer;
     width: 100%;
     max-width: 200px;
+    transition: background 0.3s;
 }
 
 .btn-nuevo:hover {
-    background: #091d36;
+    background: var(--color-primary-dark);
 }
 
 /* ============================================================
    BLOQUE 3: BUSCADOR Y FILTROS
    ============================================================ */
 .buscador {
-    background: white;
-    padding: 15px;
+    background: var(--color-white);
+    padding: 15px 20px;
     border-radius: 15px;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+    margin-bottom: 25px;
 }
 
 .buscador input {
     width: 100%;
-    padding: 12px;
+    padding: 12px 15px;
     border: 1px solid #c8d2e2;
     border-radius: 10px;
     font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+.buscador input:focus {
+    outline: none;
+    border-color: var(--color-primary);
 }
 
 .menu-filtro {
@@ -67,169 +75,403 @@
 
 .menu-filtro button {
     border: none;
-    padding: 10px 16px;
+    padding: 8px 16px;
     border-radius: 8px;
     cursor: pointer;
     font-size: 13px;
+    transition: all 0.3s;
 }
 
 .menu-filtro button:hover {
-    background: #3a4e7a;
-    color: white;
+    opacity: 0.85;
 }
 
 .btn-activo {
-    background: #324d82;
-    color: white;
+    background: var(--color-primary);
+    color: var(--color-white);
 }
 
 .btn-inactivo {
-    background: #dbe6f5;
-    color: #1f2d4d;
+    background: var(--color-primary-light);
+    color: var(--color-text);
 }
 
 /* ============================================================
-   BLOQUE 4: TEMAS DEL FORO 
+   BLOQUE 4: TARJETAS DE TEMAS (FORO)
    ============================================================ */
-.card {
-    background: white;
-    border: 2px solid #5b7db6;
-    border-radius: 15px;
+.card-tema {
+    background: var(--color-white);
+    border-radius: 18px;
     padding: 20px;
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 12px;
-}
-
-.card img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-}
-
-.card-body, .card-contenido {
-    flex: 1;
-    width: 100%;
-}
-
-.etiquetas {
-    margin-bottom: 8px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 6px;
-}
-
-.btn-etiqueta {
-    background: #dbe6f5;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid rgba(0, 0, 0, 0.04);
     cursor: pointer;
 }
 
-.card-body h2, .card-contenido h2 {
-    color: #0f2b50;
-    font-size: 16px;
-    margin: 8px 0;
+.card-tema:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
-.card-body p, .card-contenido p {
-    color: #4d5d78;
-    font-size: 13px;
-    margin: 8px 0;
+.card-tema .tema-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
 }
 
-.tema-meta {
-    color: #5a78a5;
+.card-tema .tema-header img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.card-tema .tema-header .tema-autor {
+    flex: 1;
+}
+
+.card-tema .tema-header .tema-autor strong {
+    color: var(--color-text);
+    font-size: 15px;
+}
+
+.card-tema .tema-header .tema-autor .tema-fecha {
+    color: var(--color-accent);
     font-size: 12px;
+}
+
+.card-tema .tema-etiquetas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 8px;
+}
+
+.card-tema .tema-etiquetas .etiqueta {
+    background: var(--color-primary-light);
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    color: var(--color-text);
+    font-weight: 500;
+}
+
+/* Destacado: usando color primario en vez de naranja */
+.card-tema .tema-etiquetas .etiqueta.destacado {
+    background: var(--color-primary);
+    color: var(--color-white);
+}
+
+.card-tema h2 {
+    color: var(--color-text);
+    font-size: 18px;
+    margin: 0 0 8px 0;
+}
+
+.card-tema .tema-resumen {
+    color: var(--color-text-light);
+    font-size: 14px;
+    margin: 0 0 12px 0;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card-tema .tema-acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    align-items: center;
+    padding-top: 12px;
+    border-top: 1px solid #e8ecf2;
+}
+
+.card-tema .tema-acciones .accion {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+    color: var(--color-accent);
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.card-tema .tema-acciones .accion:hover {
+    color: var(--color-text);
+}
+
+.card-tema .tema-acciones .accion.liked {
+    color: var(--color-danger);
+}
+
+.card-tema .tema-acciones .accion.eliminar {
+    color: var(--color-danger);
+}
+
+.card-tema .tema-acciones .accion.eliminar:hover {
+    color: #a71d2a;
+}
+
+.card-tema .tema-acciones .accion i {
+    font-size: 15px;
+}
+
+.card-tema .tema-acciones .accion .contador {
+    font-weight: 500;
+}
+
+.card-tema .tema-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 12px;
+    color: var(--color-accent);
     margin-top: 8px;
 }
 
+.card-tema .tema-info span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
 /* ============================================================
-   MEDIA QUERIES 
+   BLOQUE 5: MODAL DE TEMA
+   ============================================================ */
+.modal-foro .modal-body {
+    padding: 20px 25px;
+}
+
+.modal-foro .tema-detalle {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e8ecf2;
+}
+
+.modal-foro .tema-detalle h3 {
+    color: var(--color-text);
+    font-size: 22px;
+    margin: 0 0 10px 0;
+}
+
+.modal-foro .tema-detalle .tema-contenido {
+    color: var(--color-text-light);
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.modal-foro .tema-detalle .tema-versiculo {
+    background: var(--color-primary-light);
+    padding: 15px 20px;
+    border-left: 5px solid var(--color-primary);
+    border-radius: 8px;
+    margin-top: 12px;
+    font-style: italic;
+    color: var(--color-text);
+}
+
+.modal-foro .tema-detalle .tema-versiculo .referencia {
+    font-style: normal;
+    font-weight: 700;
+    margin-top: 6px;
+}
+
+.modal-foro .tema-detalle .tema-imagen {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-top: 12px;
+}
+
+.modal-foro .tema-comentarios {
+    margin-top: 20px;
+}
+
+.modal-foro .tema-comentarios h6 {
+    color: var(--color-text);
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.modal-foro .tema-comentarios .comentario {
+    background: #f8f9fc;
+    padding: 12px 15px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+
+.modal-foro .tema-comentarios .comentario .comentario-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.modal-foro .tema-comentarios .comentario .comentario-header strong {
+    color: var(--color-text);
+    font-size: 13px;
+}
+
+.modal-foro .tema-comentarios .comentario .comentario-header .comentario-fecha {
+    color: var(--color-accent);
+    font-size: 11px;
+}
+
+.modal-foro .tema-comentarios .comentario .comentario-texto {
+    color: var(--color-text-light);
+    font-size: 14px;
+    margin: 0;
+}
+
+.modal-foro .tema-comentarios .comentario .btn-eliminar-comentario {
+    background: none;
+    border: none;
+    color: var(--color-danger);
+    font-size: 12px;
+    cursor: pointer;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.modal-foro .tema-comentarios .comentario .btn-eliminar-comentario:hover {
+    background: #f8d7da;
+}
+
+.modal-foro .form-comentario {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.modal-foro .form-comentario input {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid #c8d2e2;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.modal-foro .form-comentario input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+.modal-foro .form-comentario button {
+    background: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+    white-space: nowrap;
+}
+
+.modal-foro .form-comentario button:hover {
+    background: var(--color-primary-dark);
+}
+
+/* ============================================================
+   SIN RESULTADOS
+   ============================================================ */
+.sin-resultados {
+    text-align: center;
+    padding: 50px 20px;
+    color: var(--color-accent);
+    background: var(--color-white);
+    border-radius: 15px;
+}
+
+.sin-resultados i {
+    font-size: 40px;
+    margin-bottom: 15px;
+    display: block;
+}
+
+/* ============================================================
+   MEDIA QUERIES
    ============================================================ */
 
-/* Tablets y pantallas medianas */
 @media (min-width: 768px) {
     .titulo-seccion {
         flex-direction: row;
         justify-content: space-between;
         margin-bottom: 30px;
     }
-    
+
     .titulo-seccion h1 {
         font-size: 32px;
         text-align: left;
     }
-    
+
     .btn-nuevo {
         width: auto;
-        padding: 15px 25px;
+        padding: 14px 28px;
         font-size: 16px;
     }
-    
+
     .buscador {
-        padding: 25px;
-        border-radius: 18px;
+        padding: 20px 25px;
     }
-    
+
     .buscador input {
-        padding: 15px;
-        font-size: 16px;
+        padding: 14px 18px;
+        font-size: 15px;
     }
-    
+
     .menu-filtro button {
-        padding: 12px 20px;
+        padding: 10px 20px;
         font-size: 14px;
     }
-    
-    .card {
-        flex-direction: row;
-        text-align: left;
+
+    .card-tema {
         padding: 25px;
-        border-radius: 18px;
-        gap: 15px;
     }
-    
-    .card img {
-        width: 55px;
-        height: 55px;
+
+    .card-tema h2 {
+        font-size: 20px;
     }
-    
-    .etiquetas {
-        justify-content: flex-start;
-    }
-    
-    .card-body h2, .card-contenido h2 {
-        font-size: 18px;
-    }
-    
-    .card-body p, .card-contenido p {
-        font-size: 14px;
-    }
-    
-    .tema-meta {
+
+    .card-tema .tema-info {
         font-size: 13px;
+        gap: 16px;
     }
 }
 
-/* Escritorio y pantallas grandes */
 @media (min-width: 992px) {
-    .titulo-seccion h1 {
-        font-size: 32px;
+    .card-tema {
+        padding: 25px 30px;
     }
-    
-    .card {
-        padding: 25px;
+
+    .card-tema h2 {
+        font-size: 21px;
     }
-    
-    .btn-etiqueta {
-        padding: 6px 12px;
-        font-size: 13px;
+
+    .modal-foro .modal-body {
+        padding: 25px 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-tema {
+        padding: 16px;
+    }
+
+    .card-tema .tema-acciones {
+        gap: 12px;
+    }
+
+    .card-tema .tema-acciones .accion {
+        font-size: 12px;
+    }
+
+    .modal-foro .form-comentario {
+        flex-direction: column;
     }
 }

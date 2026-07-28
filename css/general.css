@@ -1,7 +1,21 @@
 /* ============================================================
-   BLOQUE 1: CONFIGURACIÓN GENERAL
-   Selector universal, body, fuente, fondo, color e interlineado.
+   BLOQUE 1: CONFIGURACIÓN GENERAL Y PALETA DE COLORES
    ============================================================ */
+:root {
+    --color-primary: #324d82;
+    --color-primary-dark: #091d36;
+    --color-primary-light: #dbe6f5;
+    --color-secondary: #3a4e7a;
+    --color-accent: #5b7db6;
+    --color-bg: #f1f1f0;
+    --color-white: #ffffff;
+    --color-text: #091d36;
+    --color-text-light: #3a4e7a;
+    --color-danger: #dc3545;
+    --color-success: #198754;
+    --color-warning: #f18f01;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -17,8 +31,8 @@ body {
     display: flex;
     flex-direction: column;
     font-family: 'Poppins', sans-serif;
-    background-color: #f1f1f0;
-    color: #091d36;
+    background-color: var(--color-bg);
+    color: var(--color-text);
     line-height: 1.6;
 }
 
@@ -28,36 +42,36 @@ body {
 h1 {
     font-size: 32px;
     text-align: center;
-    color: #091d36;
+    color: var(--color-text);
     margin-top: 20px;
 }
 
 h2 {
     font-size: 22px;
-    color: #091d36;
+    color: var(--color-text);
     margin-top: 10px;
 }
 
 h3 {
     font-size: 16px;
-    color: #0f2b50;
+    color: var(--color-primary);
     margin: 0;
 }
 
 p {
-    color: #3a4e7a;
+    color: var(--color-text-light);
     font-size: 14px;
     margin-top: 10px;
     line-height: 1.6;
 }
 
 a {
-    color: #3a4e7a;
+    color: var(--color-text-light);
     text-decoration: none;
 }
 
 a:hover {
-    color: #091d36;
+    color: var(--color-text);
     text-decoration: underline;
 }
 
@@ -65,7 +79,7 @@ a:hover {
    BLOQUE 3: ELEMENTOS SEMÁNTICOS PRINCIPALES
    ============================================================ */
 header {
-    background-color: white;
+    background-color: var(--color-white);
     padding: 10px 15px;
     border-bottom: 1px solid #ddd;
 }
@@ -74,7 +88,7 @@ nav {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: white;
+    background-color: var(--color-white);
     padding: 10px 15px;
     border-bottom: 1px solid #ddd;
     gap: 10px;
@@ -92,7 +106,7 @@ section {
 }
 
 article {
-    background-color: white;
+    background-color: var(--color-white);
     border-radius: 18px;
     padding: 20px;
     margin-top: 20px;
@@ -100,7 +114,7 @@ article {
 }
 
 aside {
-    background-color: #f1f1f0;
+    background-color: var(--color-bg);
     padding: 15px;
     border-radius: 10px;
 }
@@ -108,21 +122,21 @@ aside {
 footer {
     text-align: center;
     padding: 20px 15px;
-    color: #3a4e7a;
-    background-color: white;
+    color: var(--color-text-light);
+    background-color: var(--color-white);
     border-top: 1px solid #ddd;
     margin-top: auto;
     font-size: 12px;
 }
 
 /* ============================================================
-   BLOQUE 4: MENÚ DE NAVEGACIÓN (MOBILE-FIRST)
+   BLOQUE 4: MENÚ DE NAVEGACIÓN
    ============================================================ */
 nav {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: white;
+    background-color: var(--color-white);
     padding: 10px 15px;
     border-bottom: 1px solid #ddd;
     gap: 10px;
@@ -134,7 +148,7 @@ nav {
     gap: 10px;
     font-size: 18px;
     font-weight: bold;
-    color: #0f2b50;
+    color: var(--color-primary);
 }
 
 .nav-links {
@@ -148,6 +162,13 @@ nav {
     font-size: 13px;
     padding: 6px 12px;
     white-space: nowrap;
+    color: var(--color-text-light);
+}
+
+.nav-links a:hover {
+    color: var(--color-primary-dark);
+    font-weight: bold;
+    text-decoration: none;
 }
 
 .nav-usuario {
@@ -159,23 +180,18 @@ nav {
 .nav-usuario a {
     font-size: 13px;
     padding: 6px 12px;
+    color: var(--color-text-light);
+}
+
+.nav-usuario a:hover {
+    color: var(--color-primary-dark);
+    text-decoration: none;
 }
 
 nav img {
     width: 40px;
     height: 40px;
     border-radius: 50px;
-}
-
-nav a {
-    text-decoration: none;
-    color: #3a4e7a;
-}
-
-nav a:hover {
-    color: #091d36;
-    font-weight: bold;
-    text-decoration: none;
 }
 
 /* ============================================================
@@ -194,7 +210,7 @@ figure {
 
 figcaption {
     font-size: 12px;
-    color: #5e83ba;
+    color: var(--color-accent);
     margin-top: 6px;
     font-style: italic;
 }
@@ -209,7 +225,7 @@ form {
 label {
     display: block;
     margin-top: 20px;
-    color: #091d36;
+    color: var(--color-text);
     font-size: 13px;
     font-weight: 600;
 }
@@ -222,7 +238,7 @@ input, textarea, select {
     padding: 0 10px;
     font-size: 14px;
     font-family: Poppins, sans-serif;
-    color: #091d36;
+    color: var(--color-text);
     background-color: #f9fbff;
 }
 
@@ -242,8 +258,8 @@ select {
 
 input:focus, textarea:focus, select:focus {
     outline: none;
-    border-color: #3a4e7a;
-    box-shadow: 0 0 4px rgba(58, 78, 122, 0.3);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 4px rgba(50, 77, 130, 0.3);
 }
 
 button {
@@ -265,15 +281,15 @@ form button {
     width: 100%;
     height: 38px;
     border-radius: 5px;
-    background-color: #3a4e7a;
-    color: #f1f1f0;
+    background-color: var(--color-primary);
+    color: var(--color-white);
     text-align: center;
     margin-top: 20px;
     font-size: 14px;
 }
 
 form button:hover {
-    background-color: #091d36;
+    background-color: var(--color-primary-dark);
     transform: scale(1.03);
 }
 
@@ -284,15 +300,15 @@ table {
     border-collapse: collapse;
     width: 100%;
     margin-top: 15px;
-    background-color: white;
+    background-color: var(--color-white);
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.06);
 }
 
 thead {
-    background-color: #3a4e7a;
-    color: white;
+    background-color: var(--color-primary);
+    color: var(--color-white);
 }
 
 th, td {
@@ -306,30 +322,48 @@ tbody tr {
 }
 
 tbody tr:hover {
-    background-color: #dbe6f5;
+    background-color: var(--color-primary-light);
 }
 
 /* ============================================================
-   BLOQUE 8: MEDIA QUERIES (MOBILE-FIRST)
+   BLOQUE 8: BOTONES UTILITARIOS (usando la paleta)
    ============================================================ */
+.btn-primary-custom {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
 
-/* Tablets y pantallas medianas */
+.btn-primary-custom:hover {
+    background-color: var(--color-primary-dark);
+}
+
+.btn-secondary-custom {
+    background-color: var(--color-primary-light);
+    color: var(--color-text);
+}
+
+.btn-secondary-custom:hover {
+    background-color: var(--color-accent);
+    color: var(--color-white);
+}
+
+.btn-danger-custom {
+    background-color: var(--color-danger);
+    color: var(--color-white);
+}
+
+.btn-danger-custom:hover {
+    background-color: #a71d2a;
+}
+
+/* ============================================================
+   BLOQUE 9: MEDIA QUERIES (MOBILE-FIRST)
+   ============================================================ */
 @media (min-width: 768px) {
-    h1 {
-        font-size: 40px;
-    }
-    
-    h2 {
-        font-size: 24px;
-    }
-    
-    h3 {
-        font-size: 18px;
-    }
-    
-    p {
-        font-size: 16px;
-    }
+    h1 { font-size: 40px; }
+    h2 { font-size: 24px; }
+    h3 { font-size: 18px; }
+    p { font-size: 16px; }
     
     main {
         width: 90%;
@@ -361,11 +395,8 @@ tbody tr:hover {
     }
 }
 
-/* Escritorio y pantallas grandes */
 @media (min-width: 992px) {
-    h1 {
-        font-size: 50px;
-    }
+    h1 { font-size: 50px; }
     
     main {
         width: 90%;
