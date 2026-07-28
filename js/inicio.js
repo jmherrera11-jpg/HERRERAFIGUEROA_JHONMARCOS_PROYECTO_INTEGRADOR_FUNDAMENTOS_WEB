@@ -1,11 +1,6 @@
 // ============================================================
 // js/inicio.js
 // Feed principal de Daat Devotional
-// COMMIT 2: carga dinámica desde JSON/localStorage
-// COMMIT 3: búsqueda en tiempo real, filtro por categoría y orden
-// COMMIT 4: CRUD (publicar, dar like, eliminar publicación propia)
-// COMMIT 6: clima (Open-Meteo)
-// COMMIT 7: gráfico de publicaciones por categoría (Chart.js)
 // ============================================================
 
 let publicacionesFeed = [];
@@ -31,6 +26,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     configurarEventosFeed();
     cargarClima(ciudadActual);
     inicializarModal();
+    setTimeout(function() { crearGraficoCategorias(); }, 500);
 });
 
 function cargarDatosFeed() {
@@ -40,16 +36,10 @@ function cargarDatosFeed() {
 }
 
 function configurarEventosFeed() {
-    // Buscador
     document.getElementById("buscarPublicacion").addEventListener("input", renderizarPublicaciones);
-    
-    // Filtro categoría
     document.getElementById("filtroCategoriaSelect").addEventListener("change", renderizarPublicaciones);
-    
-    // Ordenamiento
     document.getElementById("ordenarPublicaciones").addEventListener("change", renderizarPublicaciones);
 
-    // Botones de clima
     document.querySelectorAll(".btn-clima").forEach(function(btn) {
         btn.addEventListener("click", function() {
             document.querySelectorAll(".btn-clima").forEach(function(b) {
@@ -61,7 +51,6 @@ function configurarEventosFeed() {
         });
     });
 
-    // Toggle clima
     document.getElementById("btnToggleClima").addEventListener("click", function() {
         const panel = document.getElementById("panelClima");
         const botones = document.getElementById("climaBotones");
@@ -70,7 +59,6 @@ function configurarEventosFeed() {
         this.classList.toggle("activo");
     });
 
-    // Toggle gráfico
     document.getElementById("btnToggleGrafico").addEventListener("click", function() {
         const container = document.getElementById("graficoContainer");
         container.classList.toggle("visible");
@@ -80,15 +68,12 @@ function configurarEventosFeed() {
         }
     });
 
-    // Abrir modal de publicación
     document.getElementById("btnAbrirPublicacion").addEventListener("click", function() {
         if (modalPublicacion) modalPublicacion.show();
     });
 
-    // Botón publicar en modal
     document.getElementById("btnPublicarModal").addEventListener("click", publicarDesdeModal);
 
-    // Vista previa de imagen en modal
     document.getElementById("modalImagen").addEventListener("change", function(e) {
         const preview = document.getElementById("modalPreviewImagen");
         const file = e.target.files[0];
@@ -104,12 +89,10 @@ function configurarEventosFeed() {
         }
     });
 
-    // Restablecer datos
     document.getElementById("btnRestablecer").addEventListener("click", function() {
         restablecerDatosFeed();
     });
 
-    // Delegación de eventos para publicaciones (like y eliminar)
     document.getElementById("listaPublicaciones").addEventListener("click", function(evento) {
         const botonLike = evento.target.closest(".btn-like");
         const botonEliminar = evento.target.closest(".btn-eliminar-post");
@@ -121,8 +104,6 @@ function configurarEventosFeed() {
 
 function inicializarModal() {
     modalPublicacion = new bootstrap.Modal(document.getElementById('modalPublicacion'));
-    
-    // Llenar categorías en el modal
     const select = document.getElementById("modalCategoria");
     select.innerHTML = '';
     categoriasFeed.forEach(function(cat) {
@@ -133,12 +114,9 @@ function inicializarModal() {
     });
 }
 
-// ---------- Filtros por categoría ----------
-
 function generarFiltrosCategoria() {
     const select = document.getElementById("filtroCategoriaSelect");
     select.innerHTML = '<option value="">Todas las categorías</option>';
-    
     categoriasFeed.forEach(function(categoria) {
         const option = document.createElement("option");
         option.value = categoria.id;
@@ -147,25 +125,20 @@ function generarFiltrosCategoria() {
     });
 }
 
-// ---------- Render principal (búsqueda + filtro + orden) ----------
-
 function renderizarPublicaciones() {
     const contenedor = document.getElementById("listaPublicaciones");
     const texto = document.getElementById("buscarPublicacion").value.trim().toLowerCase();
     const categoriaId = parseInt(document.getElementById("filtroCategoriaSelect").value) || 0;
     const orden = document.getElementById("ordenarPublicaciones").value;
 
-    // Solo publicaciones con estado "publicado" o sin estado
     let resultado = publicacionesFeed.filter(function(p) { 
         return p.estado === "publicado" || !p.estado; 
     });
 
-    // Filtro por categoría
     if (categoriaId > 0) {
         resultado = resultado.filter(function(p) { return p.categoriaId === categoriaId; });
     }
 
-    // Búsqueda por texto
     if (texto !== "") {
         resultado = resultado.filter(function(p) {
             const autor = buscarPorId(usuariosFeed, p.usuarioId);
@@ -177,7 +150,6 @@ function renderizarPublicaciones() {
         });
     }
 
-    // Ordenamiento
     if (orden === "recientes") {
         resultado = resultado.slice().sort(function(a, b) { return new Date(b.fecha) - new Date(a.fecha); });
     } else if (orden === "antiguas") {
@@ -203,52 +175,93 @@ function renderizarPublicaciones() {
     });
 }
 
+// ============================================================
+// FUNCIÓN PRINCIPAL: CREAR TARJETA DE PUBLICACIÓN
+// FORMATO: @usuario · Hace X tiempo + imagen debajo del versículo
+// ============================================================
 function crearTarjetaPublicacion(publicacion) {
     const autor = buscarPorId(usuariosFeed, publicacion.usuarioId);
     const categoria = buscarPorId(categoriasFeed, publicacion.categoriaId);
     const usuarioActual = DaatStorage.usuarioActual();
     const esPropia = usuarioActual && usuarioActual.id === publicacion.usuarioId;
     
-    // Verificar si el usuario ya dio like
     const likesDados = JSON.parse(localStorage.getItem("daat_likesDados")) || [];
     const yaLiked = likesDados.includes(publicacion.id);
 
     const articulo = document.createElement("article");
     articulo.className = "publicacion";
 
-    // Mostrar imagen si existe (ruta válida)
+    // IMAGEN: se muestra debajo del versículo si existe
     let imagenHTML = '';
-    if (publicacion.imagen && publicacion.imagen.trim() !== '' && publicacion.imagen !== 'null' && publicacion.imagen !== 'undefined') {
+    if (publicacion.imagen && publicacion.imagen.trim() !== '' && 
+        publicacion.imagen !== 'null' && publicacion.imagen !== 'undefined') {
         imagenHTML = `<img src="${publicacion.imagen}" alt="${publicacion.titulo}" class="publicacion-imagen" onerror="this.style.display='none'">`;
     }
 
-    articulo.innerHTML =
-        '<div class="publicacion-header">' +
-        '<img src="' + (autor ? autor.avatar : "../../imagenes/Perfil.png") + '" alt="Perfil">' +
-        '<div class="publicacion-autor">' +
-        "<strong>" + (autor ? autor.nombre + " " + autor.apellido : "Usuario") + "</strong>" +
-        '<div class="publicacion-fecha">' + (categoria ? categoria.nombre : "") + " · " + formatearFecha(publicacion.fecha) + "</div>" +
-        "</div></div>" +
-        "<h3 class='titulo-publicacion'>" + publicacion.titulo + "</h3>" +
-        "<p>" + publicacion.contenido + "</p>" +
-        (publicacion.versiculo ?
-            '<div class="versiculo"><i>"' + publicacion.versiculo + '"</i>' +
-            '<div class="referencia"><b>' + publicacion.referencia + "</b></div></div>" : "") +
-        imagenHTML +
-        '<div class="acciones">' +
-        '<div class="btn-like' + (yaLiked ? ' liked' : '') + '" data-id="' + publicacion.id + '">' +
-            '<i class="fa-solid fa-heart"></i> ' + publicacion.likes +
-        '</div>' +
-        '<div><i class="fa-regular fa-comment-dots"></i> ' + publicacion.comentarios + "</div>" +
-        '<div><i class="fa-solid fa-location-arrow"></i> Compartir</div>' +
-        (esPropia ? 
-            '<div class="btn-eliminar-post" data-id="' + publicacion.id + '">' +
-                '<i class="fa-solid fa-trash"></i> Eliminar' +
-            '</div>' : 
-            '') +
-        "</div>";
+    // Formato de fecha: "Hace X horas/días" (USANDO obtenerTiempoRelativo)
+    const fechaTexto = obtenerTiempoRelativo(publicacion.fecha);
+    
+    const nombreAutor = autor ? autor.nombre + " " + autor.apellido : "Usuario";
+    // Usuario tag: @email (sin el dominio)
+    const usuarioTag = autor ? "@" + autor.email.split("@")[0] : "@usuario";
+    const avatar = autor ? autor.avatar : "../../imagenes/Perfil.png";
+
+    articulo.innerHTML = `
+        <div class="publicacion-header">
+            <img src="${avatar}" alt="Perfil">
+            <div class="publicacion-autor">
+                <strong>${nombreAutor}</strong>
+                <div class="publicacion-fecha">${usuarioTag} · ${fechaTexto}</div>
+            </div>
+        </div>
+        <p>${publicacion.contenido}</p>
+        ${publicacion.versiculo ? `
+            <div class="versiculo">
+                <i>"${publicacion.versiculo}"</i>
+                <div class="referencia"><b>${publicacion.referencia}</b></div>
+            </div>
+        ` : ''}
+        ${imagenHTML}
+        <div class="acciones">
+            <div class="btn-like${yaLiked ? ' liked' : ''}" data-id="${publicacion.id}">
+                <i class="fa-solid fa-heart"></i> ${publicacion.likes}
+            </div>
+            <div><i class="fa-regular fa-comment-dots"></i> ${publicacion.comentarios}</div>
+            <div><i class="fa-solid fa-location-arrow"></i> Compartir</div>
+            ${esPropia ? 
+                `<div class="btn-eliminar-post" data-id="${publicacion.id}">
+                    <i class="fa-solid fa-trash"></i> Eliminar
+                </div>` : 
+                ''
+            }
+        </div>
+    `;
 
     return articulo;
+}
+
+// ============================================================
+// FUNCIÓN PARA OBTENER TIEMPO RELATIVO
+// (Hace X horas, Hace X días, etc.)
+// ============================================================
+function obtenerTiempoRelativo(fecha) {
+    if (!fecha) return 'Fecha desconocida';
+    
+    const ahora = new Date();
+    const fechaPublicacion = new Date(fecha + 'T00:00:00');
+    const diffMs = ahora - fechaPublicacion;
+    const diffMin = Math.floor(diffMs / 60000);
+    const diffHoras = Math.floor(diffMs / 3600000);
+    const diffDias = Math.floor(diffMs / 86400000);
+
+    if (diffMin < 1) return 'Hace un momento';
+    if (diffMin < 60) return `Hace ${diffMin} minutos`;
+    if (diffHoras < 24) return `Hace ${diffHoras} horas`;
+    if (diffDias === 1) return 'Ayer';
+    if (diffDias < 7) return `Hace ${diffDias} días`;
+    if (diffDias < 30) return `Hace ${Math.floor(diffDias / 7)} semanas`;
+    if (diffDias < 365) return `Hace ${Math.floor(diffDias / 30)} meses`;
+    return `Hace ${Math.floor(diffDias / 365)} años`;
 }
 
 // ---------- Publicar desde Modal ----------
@@ -272,7 +285,6 @@ function publicarDesdeModal() {
 
     const usuarioActual = DaatStorage.usuarioActual();
 
-    // Procesar imagen si se seleccionó
     if (imagenFile) {
         const reader = new FileReader();
         reader.onload = function(event) {
@@ -304,7 +316,6 @@ function guardarPublicacion(titulo, contenido, versiculo, referencia, categoriaI
     publicacionesFeed.unshift(nuevaPublicacion);
     DaatStorage.guardar("publicaciones", publicacionesFeed);
 
-    // Limpiar modal
     document.getElementById("modalTitulo").value = "";
     document.getElementById("modalContenido").value = "";
     document.getElementById("modalVersiculo").value = "";
@@ -467,20 +478,15 @@ async function cargarClima(claveCiudad) {
         const datos = await respuesta.json();
         const actual = datos.current;
 
-        panel.innerHTML =
-            "<h3>" + ciudad.nombre + "</h3>" +
-            "<p>🌡️ " + actual.temperature_2m + " °C</p>" +
-            "<p>💧 Humedad: " + actual.relative_humidity_2m + "%</p>" +
-            "<p>💨 Viento: " + actual.wind_speed_10m + " km/h</p>" +
-            '<p class="clima-versiculo">"Los cielos cuentan la gloria de Dios" — Salmos 19:1</p>';
+        panel.innerHTML = `
+            <h3>${ciudad.nombre}</h3>
+            <p>🌡️ ${actual.temperature_2m} °C</p>
+            <p>💧 Humedad: ${actual.relative_humidity_2m}%</p>
+            <p>💨 Viento: ${actual.wind_speed_10m} km/h</p>
+            <p class="clima-versiculo">"Los cielos cuentan la gloria de Dios" — Salmos 19:1</p>
+        `;
     } catch (error) {
         panel.innerHTML = "<p style='color: rgba(255,200,200,0.9) !important;'>No se pudo obtener el clima en este momento.</p>";
         console.error(error);
     }
 }
-
-// ---------- Inicializar gráfico al cargar ----------
-// Se llama desde DOMContentLoaded
-setTimeout(function() {
-    crearGraficoCategorias();
-}, 500);

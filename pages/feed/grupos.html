@@ -11,10 +11,11 @@
     <link rel="stylesheet" href="../../css/grupos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 
 <body>
-     <nav>
+    <nav>
         <div class="nav-logo">
             <img src="../../imagenes/LogoPrincipal.png" alt="Logo">
             <p>Daat Devotional</p>
@@ -32,7 +33,7 @@
         <div class="nav-usuario">
             <button type="button" class="btn btn-light">
                 <a href="../usuario/perfil.html">
-                    <i class="fa-solid fa-user"></i> jhon32
+                    <i class="fa-solid fa-user"></i> <span id="navUsuario">jhon32</span>
                 </a>
             </button>
             <button type="button" class="btn btn-light">
@@ -50,7 +51,6 @@
                 <button type="button" id="btnCrearGrupo" class="btn btn-primary btn-lg">+ Crear Grupo</button>
             </div>
 
-            <!-- Arreglas grid vertical a horizontal -->
             <div class="buscador">
                 <input type="text" id="buscarGrupo" placeholder="Buscar grupos...">
                 <div class="menu-filtro" id="filtrosGrupos">
@@ -62,9 +62,9 @@
                 </div>
             </div>
 
-            <div class="container text-center">
-                <!-- Grupos generados dinámicamente desde categorias.json/localStorage (Commit 2) -->
-                <div class="row" id="listaGrupos"></div>
+            <div class="container-grupos">
+                <!-- Grupos generados dinámicamente desde categorias.json/localStorage -->
+                <div class="row-grupos" id="listaGrupos"></div>
             </div>
         </section>
     </main>
@@ -72,10 +72,10 @@
     <footer>
         <p>&copy; 2026 Daat Devotional - Todos los derechos reservados</p>
     </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script src="../../js/storage.js"></script>
     <script src="../../js/common.js"></script>
     <script src="../../js/grupos.js"></script>
