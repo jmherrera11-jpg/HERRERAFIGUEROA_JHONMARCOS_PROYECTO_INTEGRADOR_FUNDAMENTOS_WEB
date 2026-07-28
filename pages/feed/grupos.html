@@ -6,15 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grupos - Daat Devotional</title>
     <link rel="icon" href="../../imagenes/grupos.ico" type="image/x-icon">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="../../css/general.css">
     <link rel="stylesheet" href="../../css/grupos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 </head>
 
 <body>
-    <nav>
+     <nav>
         <div class="nav-logo">
             <img src="../../imagenes/LogoPrincipal.png" alt="Logo">
             <p>Daat Devotional</p>
@@ -47,23 +47,23 @@
         <section id="grupos-estudio">
             <div class="titulo-seccion">
                 <h1>Grupos de Estudio</h1>
-                <button class="btn btn-primary btn-lg">+ Crear Grupo</button>
+                <button type="button" id="btnCrearGrupo" class="btn btn-primary btn-lg">+ Crear Grupo</button>
             </div>
 
             <!-- Arreglas grid vertical a horizontal -->
             <div class="buscador">
-                <input type="text" placeholder="Buscar grupos...">
-                <div class="menu-filtro">
+                <input type="text" id="buscarGrupo" placeholder="Buscar grupos...">
+                <div class="menu-filtro" id="filtrosGrupos">
                     <button class="btn btn-secondary">Todos</button>
-                    <button class="btn btn-primary" disabled>Antiguo Testamento</button>
-                    <button class="btn btn-primary" disabled>Nuevo Testamento</button>
-                    <button class="btn btn-primary" disabled>Devocional</button>
-                    <button class="btn btn-primary" disabled>Estudio Profundo</button>
-                    <button class="btn btn-primary" disabled>Jóvenes</button>
+                    <button class="btn btn-primary">Antiguo Testamento</button>
+                    <button class="btn btn-primary">Nuevo Testamento</button>
+                    <button class="btn btn-primary">Devocional</button>
+                    <button class="btn btn-primary">Jóvenes</button>
                 </div>
             </div>
 
             <div class="container text-center">
+                <!-- Grupos generados dinámicamente desde categorias.json/localStorage (Commit 2) -->
                 <div class="row" id="listaGrupos"></div>
             </div>
         </section>
@@ -72,9 +72,10 @@
     <footer>
         <p>&copy; 2026 Daat Devotional - Todos los derechos reservados</p>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script src="../../js/storage.js"></script>
     <script src="../../js/common.js"></script>
     <script src="../../js/grupos.js"></script>

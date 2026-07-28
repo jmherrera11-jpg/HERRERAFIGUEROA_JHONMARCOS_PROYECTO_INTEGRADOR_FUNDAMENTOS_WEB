@@ -1,3 +1,8 @@
+// ============================================================
+// js/login.js
+// COMMIT 2: autenticación contra los usuarios cargados desde JSON
+// ============================================================
+
 document.addEventListener("DOMContentLoaded", async function () {
   await DaatStorage.init("../../json/");
 
@@ -12,7 +17,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     const clave = inputClave.value.trim();
 
     if (email === "" || clave === "") {
-      alert("Completa tu correo y contraseña.");
+      notificar("Completa tu correo y contraseña.", "error");
       return;
     }
 
@@ -22,11 +27,19 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
 
     if (!usuarioEncontrado) {
-      alert("El correo o la contraseña no coinciden con ningún usuario registrado.");
+      Swal.fire({
+        icon: "error",
+        title: "Datos incorrectos",
+        text: "El correo o la contraseña no coinciden con ningún usuario registrado."
+      });
       return;
     }
 
     DaatStorage.guardarUsuarioActual(usuarioEncontrado);
-    window.location.href = "../feed/inicio.html";
+    notificar("Bienvenido/a, " + usuarioEncontrado.nombre + ".", "exito");
+
+    setTimeout(function () {
+      window.location.href = "../feed/inicio.html";
+    }, 1200);
   });
 });

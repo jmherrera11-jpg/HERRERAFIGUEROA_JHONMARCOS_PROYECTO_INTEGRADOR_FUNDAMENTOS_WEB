@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../../css/general.css">
     <link rel="stylesheet" href="../../css/inicio.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
 </head>
 
@@ -50,19 +51,43 @@
             <article class="publicar">
                 <img src="../../imagenes/Perfil.png" alt="Perfil">
                 <div class="publicar-form">
-                    <textarea placeholder="Comparte tu reflexión bíblica..."></textarea>
-                    <input type="text" placeholder="Versículo (opcional)">
-                    <input type="text" placeholder="Referencia (ej: Juan 3:16)">
+                    <textarea id="campoReflexion" placeholder="Comparte tu reflexión bíblica..."></textarea>
+                    <input type="text" id="campoVersiculo" placeholder="Versículo (opcional)">
+                    <input type="text" id="campoReferencia" placeholder="Referencia (ej: Juan 3:16)">
                     <div class="boton-publicar">
-                        <button class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Publicar</button>
+                        <button type="button" id="btnPublicar" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Publicar</button>
                     </div>
                 </div>
             </article>
 
-            <!-- Publicación 1 -->
-            <article class="publicacion">
-                <div id="listaPublicaciones"></div>
-            </article>
+            <!-- Panel de clima (Commit 6) -->
+            <section id="panelClima" class="panel-clima">
+                <p class="text-muted">Cargando clima...</p>
+            </section>
+            <div class="clima-botones">
+                <button type="button" id="btnCiudadSD" class="btn btn-sm btn-outline-primary">Sto. Domingo</button>
+                <button type="button" id="btnCiudadQuito" class="btn btn-sm btn-outline-primary">Quito</button>
+                <button type="button" id="btnCiudadGye" class="btn btn-sm btn-outline-primary">Guayaquil</button>
+            </div>
+
+            <!-- Buscador, filtros y orden (Commit 3) -->
+            <div class="buscador">
+                <input type="text" id="buscarPublicacion" placeholder="Buscar publicaciones...">
+                <div class="menu-filtro" id="filtrosCategoria"></div>
+                <select id="ordenarPublicaciones" class="form-select">
+                    <option value="recientes">Más recientes</option>
+                    <option value="antiguas">Más antiguas</option>
+                    <option value="populares">Más populares</option>
+                </select>
+            </div>
+
+            <!-- Gráfico de publicaciones por categoría (Commit 7) -->
+            <div class="grafico-contenedor">
+                <canvas id="graficoCategorias"></canvas>
+            </div>
+
+            <!-- Publicaciones generadas dinámicamente desde JSON/localStorage (Commit 2) -->
+            <div id="listaPublicaciones"></div>
 
             <article class="publicacion">
                 <div class="publicacion-header">
@@ -76,40 +101,39 @@
                     Reflexionando sobre el amor de Dios esta mañana. Este versículo me ha traído mucha paz en tiempos
                     difíciles.
                 </p>
-                <div id="carouselExample" class="carousel slide">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="../../imagenes/noticia.jpg" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="../../imagenes/noticia2.jpg" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="../../imagenes/noticia3.jpg" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="../../imagenes/noticia4.jpg" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="../../imagenes/noticia5.jpg" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <video src="../../videos/noticiaF.mp4" class="d-block w-100" alt="..." controls loop
-                                autoplay>
-                        </div>
+            <div id="carouselExample" class="carousel slide">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="../../imagenes/noticia.jpg" class="d-block w-100" alt="...">
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
-                        data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
+                    <div class="carousel-item">
+                        <img src="../../imagenes/noticia2.jpg" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../../imagenes/noticia3.jpg" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../../imagenes/noticia4.jpg" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../../imagenes/noticia5.jpg" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <video src="../../videos/noticiaF.mp4" class="d-block w-100" alt="..." controls loop autoplay>
+                    </div>
                 </div>
-            </article>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+    </article>
         </div>
     </main>
 
@@ -119,7 +143,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../../js/storage.js"></script>
     <script src="../../js/common.js"></script>
     <script src="../../js/inicio.js"></script>
