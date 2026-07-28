@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="../../css/inicio.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 
 <body>
@@ -34,7 +34,7 @@
         <div class="nav-usuario">
             <button type="button" class="btn btn-light">
                 <a href="../usuario/perfil.html">
-                    <i class="fa-solid fa-user"></i> jhon32
+                    <i class="fa-solid fa-user"></i> <span id="navUsuario">jhon32</span>
                 </a>
             </button>
             <button type="button" class="btn btn-light">
@@ -47,48 +47,61 @@
 
     <main>
         <div id="container">
-            <!-- Sección para publicar -->
-            <article class="publicar">
-                <img src="../../imagenes/Perfil.png" alt="Perfil">
-                <div class="publicar-form">
-                    <textarea id="campoReflexion" placeholder="Comparte tu reflexión bíblica..."></textarea>
-                    <input type="text" id="campoVersiculo" placeholder="Versículo (opcional)">
-                    <input type="text" id="campoReferencia" placeholder="Referencia (ej: Juan 3:16)">
-                    <div class="boton-publicar">
-                        <button type="button" id="btnPublicar" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Publicar</button>
-                    </div>
+            
+            <!-- ===== CINTA DE OPCIONES (ÍCONO 3 RAYAS) ===== -->
+            <div class="cinta-opciones">
+                <div class="grupo-botones">
+                    <button type="button" class="btn-opcion" id="btnToggleClima">
+                        <i class="fa-solid fa-cloud-sun"></i> Clima
+                    </button>
+                    <button type="button" class="btn-opcion" id="btnToggleGrafico">
+                        <i class="fa-solid fa-chart-bar"></i> Estadísticas
+                    </button>
+                    <button type="button" class="btn-opcion" id="btnAbrirPublicacion">
+                        <i class="fa-solid fa-pen-to-square"></i> Publicar
+                    </button>
                 </div>
-            </article>
-
-            <!-- Panel de clima (Commit 6) -->
-            <section id="panelClima" class="panel-clima">
-                <p class="text-muted">Cargando clima...</p>
-            </section>
-            <div class="clima-botones">
-                <button type="button" id="btnCiudadSD" class="btn btn-sm btn-outline-primary">Sto. Domingo</button>
-                <button type="button" id="btnCiudadQuito" class="btn btn-sm btn-outline-primary">Quito</button>
-                <button type="button" id="btnCiudadGye" class="btn btn-sm btn-outline-primary">Guayaquil</button>
+                <div>
+                    <button type="button" class="btn-opcion" id="btnRestablecer">
+                        <i class="fa-solid fa-rotate"></i> Restablecer
+                    </button>
+                </div>
             </div>
 
-            <!-- Buscador, filtros y orden (Commit 3) -->
-            <div class="buscador">
+            <!-- ===== PANEL DE CLIMA ===== -->
+            <div id="panelClima" class="panel-clima">
+                <p style="color: rgba(255,255,255,0.7) !important;">Cargando clima...</p>
+            </div>
+            <div class="clima-botones" id="climaBotones">
+                <button type="button" class="btn-clima activo" data-ciudad="santo-domingo">Santo Domingo</button>
+                <button type="button" class="btn-clima" data-ciudad="quito">Quito</button>
+                <button type="button" class="btn-clima" data-ciudad="guayaquil">Guayaquil</button>
+                <button type="button" class="btn-clima" data-ciudad="quevedo">Quevedo</button>
+            </div>
+
+            <!-- ===== GRÁFICO (OCULTO POR DEFECTO) ===== -->
+            <div class="grafico-contenedor" id="graficoContainer">
+                <h4><i class="fa-solid fa-chart-bar"></i> Publicaciones por categoría</h4>
+                <canvas id="graficoCategorias"></canvas>
+            </div>
+
+            <!-- ===== BUSCADOR Y FILTROS (COMPACTOS) ===== -->
+            <div class="buscador-filtros">
                 <input type="text" id="buscarPublicacion" placeholder="Buscar publicaciones...">
-                <div class="menu-filtro" id="filtrosCategoria"></div>
-                <select id="ordenarPublicaciones" class="form-select">
+                <select id="filtroCategoriaSelect">
+                    <option value="">Todas las categorías</option>
+                </select>
+                <select id="ordenarPublicaciones">
                     <option value="recientes">Más recientes</option>
                     <option value="antiguas">Más antiguas</option>
                     <option value="populares">Más populares</option>
                 </select>
             </div>
 
-            <!-- Gráfico de publicaciones por categoría (Commit 7) -->
-            <div class="grafico-contenedor">
-                <canvas id="graficoCategorias"></canvas>
-            </div>
-
-            <!-- Publicaciones generadas dinámicamente desde JSON/localStorage (Commit 2) -->
+            <!-- ===== PUBLICACIONES DINÁMICAS ===== -->
             <div id="listaPublicaciones"></div>
 
+            <!-- ===== CARRUSEL ESTÁTICO (se mantiene) ===== -->
             <article class="publicacion">
                 <div class="publicacion-header">
                     <img src="../../imagenes/Perfil.png" alt="Perfil">
@@ -101,45 +114,96 @@
                     Reflexionando sobre el amor de Dios esta mañana. Este versículo me ha traído mucha paz en tiempos
                     difíciles.
                 </p>
-            <div id="carouselExample" class="carousel slide">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="../../imagenes/noticia.jpg" class="d-block w-100" alt="...">
+                <div id="carouselExample" class="carousel slide">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="../../imagenes/noticia.jpg" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="../../imagenes/noticia2.jpg" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="../../imagenes/noticia3.jpg" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="../../imagenes/noticia4.jpg" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="../../imagenes/noticia5.jpg" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <video src="../../videos/noticiaF.mp4" class="d-block w-100" alt="..." controls loop autoplay>
+                        </div>
                     </div>
-                    <div class="carousel-item">
-                        <img src="../../imagenes/noticia2.jpg" class="d-block w-100" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="../../imagenes/noticia3.jpg" class="d-block w-100" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="../../imagenes/noticia4.jpg" class="d-block w-100" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="../../imagenes/noticia5.jpg" class="d-block w-100" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <video src="../../videos/noticiaF.mp4" class="d-block w-100" alt="..." controls loop autoplay>
-                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-    </article>
+            </article>
         </div>
     </main>
+
+    <!-- ===== MODAL DE PUBLICACIÓN (BOOTSTRAP) ===== -->
+    <div class="modal fade modal-publicacion" id="modalPublicacion" tabindex="-1" aria-labelledby="modalPublicacionLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalPublicacionLabel">
+                        <i class="fa-solid fa-pen-to-square"></i> Nueva Publicación
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formPublicacion">
+                        <div class="mb-3">
+                            <label for="modalTitulo" class="form-label">Título</label>
+                            <input type="text" class="form-control" id="modalTitulo" placeholder="Título de tu reflexión" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="modalContenido" class="form-label">Reflexión</label>
+                            <textarea class="form-control" id="modalContenido" rows="4" placeholder="Comparte tu reflexión bíblica..." required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="modalVersiculo" class="form-label">Versículo (opcional)</label>
+                            <input type="text" class="form-control" id="modalVersiculo" placeholder="Escribe el versículo...">
+                        </div>
+                        <div class="mb-3">
+                            <label for="modalReferencia" class="form-label">Referencia (opcional)</label>
+                            <input type="text" class="form-control" id="modalReferencia" placeholder="Ej: Juan 3:16">
+                        </div>
+                        <div class="mb-3">
+                            <label for="modalCategoria" class="form-label">Categoría</label>
+                            <select class="form-control" id="modalCategoria"></select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="modalImagen" class="form-label">Imagen (opcional)</label>
+                            <input type="file" class="form-control" id="modalImagen" accept="image/*">
+                            <img id="modalPreviewImagen" class="preview-imagen" alt="Vista previa">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="btnPublicarModal">
+                        <i class="fa-solid fa-paper-plane"></i> Publicar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <footer>
         <p>&copy; 2026 Daat Devotional - Todos los derechos reservados</p>
     </footer>
+
+    <!-- ===== SCRIPTS ===== -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>

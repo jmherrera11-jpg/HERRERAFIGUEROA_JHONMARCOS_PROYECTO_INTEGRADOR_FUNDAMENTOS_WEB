@@ -1,245 +1,278 @@
 /* ============================================================
    BLOQUE 1: CONTENEDOR PRINCIPAL DEL FEED
    ============================================================ */
-#container {
-    width: 100%;
-    margin: 0 auto;
-}
 
-/* ============================================================
-   BLOQUE 2: SECCIÓN DE PUBLICAR
-   ============================================================ */
-.publicar {
-    background: #f9fbff;
+/* ---- CINTA DE OPCIONES ---- */
+.cinta-opciones {
+    background: white;
     border-radius: 15px;
-    padding: 25px;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
+    padding: 12px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     display: flex;
-    gap: 15px;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
-.publicar-form textarea {
-    width: 100%;
-    height: 80px;
-    border: 1px solid #c2d2e9;
-    border-radius: 10px;
-    padding: 15px;
-    font-family: Poppins, sans-serif;
+.cinta-opciones .grupo-botones {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
 }
 
-.publicar-form input {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #c2d2e9;
-    border-radius: 10px;
-    margin-top: 10px;
-}
-
-.publicar img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-}
-
-.publicar-form {
-    flex: 1;
-}
-
-.boton-publicar {
-    text-align: right;
-    margin-top: 10px;
-}
-
-.boton-publicar button {
-    background: #314d83;
-    color: white;
+.cinta-opciones .btn-opcion {
+    background: #f1f1f0;
     border: none;
-    padding: 12px 28px;
+    padding: 8px 16px;
     border-radius: 10px;
-    cursor: pointer;
-}
-
-.boton-publicar button:hover {
-    background: #091d36;
-}
-
-/* ============================================================
-   BLOQUE 3: PUBLICACIONES
-   ============================================================ */
-.publicacion {
-    background: #f9fbff;
-    border-radius: 15px;
-    padding: 25px;
-    margin-top: 30px;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
-}
-
-.publicacion-header {
+    font-size: 14px;
+    color: #0f2b50;
+    transition: all 0.2s;
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
+    gap: 6px;
 }
 
-.publicacion-header img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+.cinta-opciones .btn-opcion:hover {
+    background: #324d82;
+    color: white;
 }
 
-.publicacion-autor strong {
-    color: #091d36;
-    font-size: 16px;
+.cinta-opciones .btn-opcion.activo {
+    background: #324d82;
+    color: white;
 }
 
-.publicacion-fecha {
-    color: #5e83ba;
-    font-size: 12px;
-}
-
-.publicacion p {
-    color: #091d36;
-    line-height: 1.6;
-    text-align: justify;
-}
-
-.versiculo {
-    background: #dce7f7;
+/* ---- PANEL DE CLIMA ---- */
+.panel-clima {
+    background: linear-gradient(135deg, #2E86AB, #1a5276);
+    color: white;
+    border-radius: 15px;
     padding: 20px;
-    border-left: 5px solid #314d83;
-    border-radius: 8px;
-    color: #091d36;
-    margin-top: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-.referencia {
+.panel-clima h3 {
+    color: white;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.panel-clima p {
+    color: rgba(255,255,255,0.9);
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.panel-clima .clima-versiculo {
+    font-style: italic;
+    color: rgba(255,255,255,0.8);
+    font-size: 13px;
     margin-top: 10px;
-    font-weight: bold;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    padding-top: 10px;
 }
 
-.acciones {
+.panel-clima.oculto {
+    display: none;
+}
+
+/* ---- BOTONES DE CLIMA ---- */
+.clima-botones {
     display: flex;
-    gap: 25px;
-    margin-top: 20px;
-    color: #5e83ba;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
 }
 
-.acciones div {
+.clima-botones.oculto {
+    display: none;
+}
+
+.clima-botones .btn-clima {
+    background: #e8ecf2;
+    border: none;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    color: #0f2b50;
+    transition: all 0.2s;
     cursor: pointer;
 }
 
-.acciones div:hover {
-    color: #091d36;
+.clima-botones .btn-clima:hover {
+    background: #324d82;
+    color: white;
 }
 
-#carouselExample img, video{
-    width: 50%;
-    height: 600px;
+.clima-botones .btn-clima.activo {
+    background: #324d82;
+    color: white;
+}
+
+/* ---- BUSCADOR Y FILTROS COMPACTOS ---- */
+.buscador-filtros {
+    background: white;
+    border-radius: 15px;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.buscador-filtros input {
+    flex: 1;
+    min-width: 200px;
+    padding: 10px 15px;
+    border: 1px solid #c8d2e2;
+    border-radius: 10px;
+    font-size: 14px;
+    background: #f9fbff;
+}
+
+.buscador-filtros input:focus {
+    outline: none;
+    border-color: #324d82;
+}
+
+.buscador-filtros select {
+    padding: 10px 15px;
+    border: 1px solid #c8d2e2;
+    border-radius: 10px;
+    font-size: 14px;
+    background: #f9fbff;
+    color: #0f2b50;
+    min-width: 150px;
+}
+
+.buscador-filtros select:focus {
+    outline: none;
+    border-color: #324d82;
+}
+
+/* ---- TARJETAS DE PUBLICACIÓN ---- */
+.publicacion-imagen {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
     border-radius: 12px;
+    margin-top: 12px;
 }
 
-/* Tablets y pantallas medianas */
-@media (min-width: 768px) {
-    .container {
-        padding: 0 20px;
+.publicacion .acciones .btn-like {
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.publicacion .acciones .btn-like:hover {
+    color: #e63946;
+    transform: scale(1.1);
+}
+
+.publicacion .acciones .btn-like.liked {
+    color: #e63946;
+}
+
+.publicacion .acciones .btn-eliminar-post {
+    cursor: pointer;
+    color: #dc3545;
+}
+
+.publicacion .acciones .btn-eliminar-post:hover {
+    color: #a71d2a;
+}
+
+/* ---- SIN RESULTADOS ---- */
+.sin-resultados {
+    text-align: center;
+    padding: 40px 20px;
+    color: #5b7db6;
+}
+
+.sin-resultados i {
+    font-size: 48px;
+    margin-bottom: 15px;
+    display: block;
+}
+
+/* ---- GRÁFICO ---- */
+.grafico-contenedor {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    display: none;
+}
+
+.grafico-contenedor.visible {
+    display: block;
+}
+
+.grafico-contenedor h4 {
+    color: #0f2b50;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+/* ---- MODAL DE PUBLICACIÓN ---- */
+.modal-publicacion textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.modal-publicacion .form-label {
+    font-weight: 600;
+    color: #0f2b50;
+}
+
+.preview-imagen {
+    margin-top: 10px;
+    max-width: 200px;
+    border-radius: 10px;
+    display: none;
+}
+
+.preview-imagen.visible {
+    display: block;
+}
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 768px) {
+    .cinta-opciones {
+        flex-direction: column;
+        align-items: stretch;
     }
     
-    .publicar {
-        flex-direction: row;
-        padding: 25px;
-        gap: 15px;
+    .cinta-opciones .grupo-botones {
+        justify-content: center;
     }
     
-    .publicar img {
-        width: 60px;
-        height: 60px;
+    .buscador-filtros {
+        flex-direction: column;
     }
     
-    .publicar-form textarea {
-        height: 80px;
+    .buscador-filtros input,
+    .buscador-filtros select {
+        width: 100%;
+        min-width: unset;
+    }
+    
+    .panel-clima {
         padding: 15px;
-        font-size: 15px;
     }
     
-    .publicar-form input {
-        padding: 12px;
-        font-size: 15px;
+    .panel-clima h3 {
+        font-size: 17px;
     }
     
-    .boton-publicar button {
-        padding: 12px 28px;
-        font-size: 15px;
-    }
-    
-    .publicacion {
-        padding: 25px;
-        margin-top: 30px;
-    }
-    
-    .publicacion-header img {
-        width: 50px;
-        height: 50px;
-    }
-    
-    .publicacion-autor strong {
-        font-size: 16px;
-    }
-    
-    .publicacion-fecha {
-        font-size: 12px;
-    }
-    
-    .publicacion p {
-        font-size: 15px;
-    }
-    
-    .versiculo {
-        padding: 20px;
-        font-size: 15px;
-    }
-    
-    .acciones {
-        gap: 25px;
-        font-size: 15px;
-    }
-    
-    #carouselExample {
-        padding: 25px;
-        margin-top: 30px;
-    }
-    
-    #carouselExample img,
-    #carouselExample video {
-        max-height: 400px;
-    }
-}
-
-/* Escritorio y pantallas grandes */
-@media (min-width: 992px) {
-    .container {
-        padding: 0 30px;
-    }
-    
-    .publicar {
-        padding: 30px;
-    }
-    
-    .publicar img {
-        width: 70px;
-        height: 70px;
-    }
-    
-    #carouselExample img,
-    #carouselExample video {
-        max-height: 600px;
-    }
-    
-    .publicacion {
-        padding: 30px;
-    }
-    
-    .versiculo {
-        padding: 25px;
-        font-size: 16px;
+    .clima-botones {
+        justify-content: center;
     }
 }
