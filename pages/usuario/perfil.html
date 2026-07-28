@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil - Daat Devotional</title>
     <link rel="icon" href="../../imagenes/perfil.ico" type="image/x-icon">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="../../css/general.css">
     <link rel="stylesheet" href="../../css/perfil.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
     <nav>
         <div class="nav-logo">
@@ -21,9 +24,11 @@
                     Inicio</a></button>
             <button type="button" class="btn btn-light"><a href="../feed/grupos.html"><i class="fa-solid fa-users"></i>
                     Grupos</a></button>
-            <button type="button" class="btn btn-light"><a href="../feed/foros.html"><i class="fa-solid fa-comments"></i>
+            <button type="button" class="btn btn-light"><a href="../feed/foros.html"><i
+                        class="fa-solid fa-comments"></i>
                     Foros</a></button>
-            <button type="button" class="btn btn-light"><a href="../feed/chat.html"><i class="fa-solid fa-comment-dots"></i>
+            <button type="button" class="btn btn-light"><a href="../feed/chat.html"><i
+                        class="fa-solid fa-comment-dots"></i>
                     Chat</a></button>
         </div>
         <div class="nav-usuario">
@@ -49,27 +54,28 @@
                     <button class="btn-editar">Editar Perfil</button>
 
                     <div class="info-general">
-                        <h1>jhon32</h1>
-                        <div class="usuario">@jhon32</div>
-                        <div class="bio">Estudiante de la Palabra, apasionado por el estudio bíblico profundo.</div>
+                        <h1 id="nombrePerfil">jhon32</h1>
+                        <div id="usuarioPerfil" class="usuario">@jhon32</div>
+                        <div id="bioPerfil" class="bio">Estudiante de la Palabra, apasionado por el estudio bíblico
+                            profundo.</div>
 
                         <div class="info-enlaces">
                             <div><i class="fa-solid fa-calendar-days"></i> Se unió en Enero 2026</div>
-                            <div><i class="fa-solid fa-globe"></i> En todo el mundo</div>
+                            <div id="nacionalidadPerfil"><i class="fa-solid fa-globe"></i> En todo el mundo</div>
                         </div>
 
                         <div class="info-seguimiento">
                             <div class="stat">
                                 <div class="stat-label">Publicaciones</div>
-                                <div class="stat-valor">24</div>
+                                <div id="statPublicaciones" class="stat-valor">24</div>
                             </div>
                             <div class="stat">
                                 <div class="stat-label">Seguidores</div>
-                                <div class="stat-valor">156</div>
+                                <div id="statPublicaciones" class="stat-valor">156</div>
                             </div>
                             <div class="stat">
                                 <div class="stat-label">Siguiendo</div>
-                                <div class="stat-valor">89</div>
+                                <div id="statPublicaciones" class="stat-valor">89</div>
                             </div>
                         </div>
                     </div>
@@ -80,27 +86,7 @@
         <section class="publicaciones-perfil">
             <h2>Mis Publicaciones</h2>
 
-            <article class="post">
-                <p>La paz de Dios sobrepasa todo entendimiento. Hoy decidí confiar más en Su plan que en mis propios planes.</p>
-                <div class="post-versiculo">
-                    <p>"Y la paz de Dios, que sobrepasa todo entendimiento, guardará vuestros corazones y vuestros pensamientos en Cristo Jesús."</p>
-                    <div class="referencia">Filipenses 4:7</div>
-                </div>
-                <div class="acciones-post">
-                    <div><i class="fa-solid fa-heart"></i> 24</div>
-                    <div><i class="fa-regular fa-comment-dots"></i> 8</div>
-                    <div><i class="fa-solid fa-location-arrow"></i> Compartir</div>
-                </div>
-            </article>
-
-            <article class="post">
-                <p>Cada día es una nueva oportunidad para acercarnos más a Dios y fortalecer nuestra fe.</p>
-                <div class="acciones-post">
-                    <div><i class="fa-solid fa-heart"></i> 24</div>
-                    <div><i class="fa-regular fa-comment-dots"></i> 8</div>
-                    <div><i class="fa-solid fa-location-arrow"></i> Compartir</div>
-                </div>
-            </article>
+            <div id="listaMisPublicaciones"></div>
         </section>
 
         <section id="galeria-fotos">
@@ -131,6 +117,12 @@
     <footer>
         <p>&copy; 2026 Daat Devotional - Todos los derechos reservados</p>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <script src="../../js/storage.js"></script>
+    <script src="../../js/common.js"></script>
+    <script src="../../js/perfil.js"></script>
 </body>
+
 </html>

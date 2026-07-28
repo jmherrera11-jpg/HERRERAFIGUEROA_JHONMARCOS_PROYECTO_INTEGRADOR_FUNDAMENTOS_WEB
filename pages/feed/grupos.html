@@ -6,14 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grupos - Daat Devotional</title>
     <link rel="icon" href="../../imagenes/grupos.ico" type="image/x-icon">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="../../css/general.css">
     <link rel="stylesheet" href="../../css/grupos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
-     <nav>
+    <nav>
         <div class="nav-logo">
             <img src="../../imagenes/LogoPrincipal.png" alt="Logo">
             <p>Daat Devotional</p>
@@ -63,40 +64,7 @@
             </div>
 
             <div class="container text-center">
-                <div class="row">
-                    <article class="card-grupo">
-                        <div class="col">
-                            <div class="card-banner card-banner-1"></div>
-                            <h2>Estudio de los Evangelios</h2>
-                            <p>Estudiamos en profundidad los cuatro evangelios, explorando la vida y enseñanzas de
-                                Jesús.
-                            </p>
-                            <div class="card-miembros">234 miembros</div>
-                            <button class="btn-etiqueta">Nuevo Testamento</button>
-                            <button class="btn-abandonar">Abandonar</button>
-                        </div>
-                    </article>
-                    <article class="card-grupo">
-                        <div class="col">
-                            <div class="card-banner card-banner-2"></div>
-                            <h2>Salmos y Adoración</h2>
-                            <p>Reflexionamos sobre los Salmos y cómo aplicarlos en nuestra vida diaria.</p>
-                            <div class="card-miembros">189 miembros</div>
-                            <button class="btn-etiqueta">Antiguo Testamento</button>
-                            <button class="btn-abandonar">Abandonar</button>
-                        </div>
-                    </article>
-                    <article class="card-grupo">
-                        <div class="col">
-                            <div class="card-banner card-banner-3"></div>
-                            <h2>Profecías del Antiguo Testamento</h2>
-                            <p>Análisis detallado de las profecías y su cumplimiento en Cristo.</p>
-                            <div class="card-miembros">156 miembros</div>
-                            <button class="btn-etiqueta">Antiguo Testamento</button>
-                            <button class="btn-unirse">Solicitar unirse</button>
-                        </div>
-                    </article>
-                </div>
+                <div class="row" id="listaGrupos"></div>
             </div>
         </section>
     </main>
@@ -104,7 +72,12 @@
     <footer>
         <p>&copy; 2026 Daat Devotional - Todos los derechos reservados</p>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <script src="../../js/storage.js"></script>
+    <script src="../../js/common.js"></script>
+    <script src="../../js/grupos.js"></script>
 </body>
 
 </html>

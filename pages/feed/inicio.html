@@ -61,31 +61,10 @@
 
             <!-- Publicación 1 -->
             <article class="publicacion">
-                <div class="publicacion-header">
-                    <img src="../../imagenes/Perfil.png" alt="Perfil">
-                    <div class="publicacion-autor">
-                        <strong>María González</strong>
-                        <div class="publicacion-fecha">@maria_g · Hace 2 horas</div>
-                    </div>
-                </div>
-                <p>
-                    Reflexionando sobre el amor de Dios esta mañana. Este versículo me ha traído mucha paz en tiempos
-                    difíciles.
-                </p>
-                <div class="versiculo">
-                    <i>
-                        "Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito,
-                        para que todo aquel que en él cree, no se pierda, mas tenga vida eterna."
-                    </i>
-                    <div class="referencia"><b>Juan 3:16</b></div>
-                </div>
-                <div class="acciones">
-                    <div><i class="fa-solid fa-heart"></i> 24</div>
-                    <div><i class="fa-regular fa-comment-dots"></i> 8</div>
-                    <div><i class="fa-solid fa-location-arrow"></i> Compartir</div>
-                </div>
+                <div id="listaPublicaciones"></div>
             </article>
-            <article class="publicacion"> 
+
+            <article class="publicacion">
                 <div class="publicacion-header">
                     <img src="../../imagenes/Perfil.png" alt="Perfil">
                     <div class="publicacion-autor">
@@ -97,39 +76,40 @@
                     Reflexionando sobre el amor de Dios esta mañana. Este versículo me ha traído mucha paz en tiempos
                     difíciles.
                 </p>
-            <div id="carouselExample" class="carousel slide">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="../../imagenes/noticia.jpg" class="d-block w-100" alt="...">
+                <div id="carouselExample" class="carousel slide">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="../../imagenes/noticia.jpg" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="../../imagenes/noticia2.jpg" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="../../imagenes/noticia3.jpg" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="../../imagenes/noticia4.jpg" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="../../imagenes/noticia5.jpg" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <video src="../../videos/noticiaF.mp4" class="d-block w-100" alt="..." controls loop
+                                autoplay>
+                        </div>
                     </div>
-                    <div class="carousel-item">
-                        <img src="../../imagenes/noticia2.jpg" class="d-block w-100" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="../../imagenes/noticia3.jpg" class="d-block w-100" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="../../imagenes/noticia4.jpg" class="d-block w-100" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="../../imagenes/noticia5.jpg" class="d-block w-100" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <video src="../../videos/noticiaF.mp4" class="d-block w-100" alt="..." controls loop autoplay>
-                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-    </article>
+            </article>
         </div>
     </main>
 
@@ -139,6 +119,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
+
+    <script src="../../js/storage.js"></script>
+    <script src="../../js/common.js"></script>
+    <script src="../../js/inicio.js"></script>
 </body>
 
 </html>
