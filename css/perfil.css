@@ -10,7 +10,7 @@
    BLOQUE 2: TARJETA DE PERFIL
    ============================================================ */
 .tarjeta-perfil {
-    background-color: white;
+    background-color: var(--color-white);
     border-radius: 18px;
     overflow: hidden;
     box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.08);
@@ -18,7 +18,7 @@
 
 .banner-perfil {
     height: 120px;
-    background: linear-gradient(90deg, #3a4e7a, #5e83ba);
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
 }
 
 .perfil-info {
@@ -30,28 +30,29 @@
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    border: 5px solid white;
+    border: 5px solid var(--color-white);
     position: absolute;
     top: -50px;
     left: 20px;
-    background-color: white;
+    background-color: var(--color-white);
     object-fit: cover;
 }
 
 .btn-editar {
     float: right;
-    background-color: #3a4e7a;
-    color: white;
+    background-color: var(--color-primary);
+    color: var(--color-white);
     border: none;
     padding: 10px 20px;
     border-radius: 10px;
     font-size: 13px;
     cursor: pointer;
     font-weight: 600;
+    transition: background 0.3s;
 }
 
 .btn-editar:hover {
-    background-color: #091d36;
+    background-color: var(--color-primary-dark);
 }
 
 /* ============================================================
@@ -63,20 +64,20 @@
 
 .info-general h1 {
     margin: 0;
-    color: #091d36;
+    color: var(--color-text);
     font-size: 22px;
     text-align: left;
 }
 
 .info-general .usuario {
     margin-top: 3px;
-    color: #5e83ba;
+    color: var(--color-accent);
     font-size: 16px;
 }
 
 .info-general .bio {
     margin-top: 15px;
-    color: #3a4e7a;
+    color: var(--color-text-light);
     line-height: 24px;
     font-size: 14px;
 }
@@ -86,10 +87,28 @@
     flex-wrap: wrap;
     gap: 20px;
     margin-top: 15px;
-    color: #5e83ba;
+    color: var(--color-accent);
     font-size: 13px;
+    align-items: center;
 }
 
+/* ---- BANDERA DEL PAÍS ---- */
+.bandera-pais {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: var(--color-text-light);
+}
+
+.bandera-pais img {
+    width: 24px;
+    height: 16px;
+    border-radius: 3px;
+    object-fit: cover;
+}
+
+/* ---- ESTADÍSTICAS ---- */
 .info-seguimiento {
     display: flex;
     gap: 40px;
@@ -101,13 +120,13 @@
 .stat,
 .stat-label {
     text-align: center;
-    color: #5e83ba;
+    color: var(--color-accent);
     font-size: 12px;
 }
 
 .stat-valor {
     font-size: 18px;
-    color: #091d36;
+    color: var(--color-text);
     font-weight: bold;
 }
 
@@ -117,70 +136,181 @@
 .publicaciones-perfil {
     width: 100%;
     margin: 20px auto;
-    background-color: white;
+    background-color: var(--color-white);
     border-radius: 18px;
     padding: 20px;
     box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.08);
 }
 
 .publicaciones-perfil h2 {
-    color: #091d36;
+    color: var(--color-text);
     margin-top: 0;
     font-size: 20px;
 }
 
-.post {
-    margin-top: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #c2d2e9;
-}
-
-.post p {
-    color: #3a4e7a;
-    line-height: 24px;
-    font-size: 14px;
-}
-
-.post-versiculo {
-    background-color: #c2d2e9;
-    border-left: 5px solid #3a4e7a;
+/* ============================================================
+   BLOQUE 5: GRÁFICO DEL PERFIL (MÁS PEQUEÑO)
+   ============================================================ */
+.grafico-perfil-container {
+    max-width: 450px;
+    margin: 0 auto 20px;
     padding: 15px;
-    border-radius: 10px;
-    margin-top: 15px;
+    background: var(--color-white);
+    border-radius: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
-.post-versiculo p {
-    font-style: italic;
-    color: #091d36;
-    line-height: 26px;
-    margin-top: 0;
-    font-size: 14px;
-}
-
-.post-versiculo .referencia {
-    color: #3a4e7a;
-    font-weight: 600;
-    margin-top: 8px;
-}
-
-.acciones-post {
-    display: flex;
-    gap: 20px;
-    margin-top: 15px;
-    color: #5e83ba;
-    font-size: 14px;
-}
-
-.acciones-post div {
-    cursor: pointer;
-}
-
-.acciones-post div:hover {
-    color: #091d36;
+.grafico-perfil-container canvas {
+    max-height: 200px;
 }
 
 /* ============================================================
-   BLOQUE 5: GALERÍA DE FOTOS
+   BLOQUE 6: PUBLICACIONES (formato igual al inicio)
+   ============================================================ */
+.publicacion {
+    background: var(--color-white);
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
+}
+
+.publicacion-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.publicacion-header img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.publicacion-autor strong {
+    color: var(--color-text);
+    font-size: 15px;
+}
+
+.publicacion-fecha {
+    color: var(--color-accent);
+    font-size: 12px;
+}
+
+.publicacion p {
+    color: var(--color-text);
+    line-height: 1.6;
+    text-align: justify;
+    margin-top: 0;
+}
+
+.versiculo {
+    background: var(--color-primary-light);
+    padding: 15px 20px;
+    border-left: 5px solid var(--color-primary);
+    border-radius: 8px;
+    color: var(--color-text);
+    margin-top: 12px;
+}
+
+.versiculo i {
+    font-style: italic;
+}
+
+.referencia {
+    margin-top: 8px;
+    font-weight: bold;
+}
+
+/* ---- IMAGEN DE PUBLICACIÓN ---- */
+.publicacion-imagen {
+    width: 100%;
+    max-height: 350px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-top: 12px;
+}
+
+/* ---- ACCIONES ---- */
+.acciones {
+    display: flex;
+    gap: 20px;
+    margin-top: 15px;
+    color: var(--color-accent);
+    flex-wrap: wrap;
+}
+
+.acciones div {
+    cursor: pointer;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.acciones div:hover {
+    color: var(--color-text);
+}
+
+.acciones .btn-like {
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.acciones .btn-like:hover {
+    color: #e63946;
+    transform: scale(1.1);
+}
+
+.acciones .btn-like.liked {
+    color: #e63946;
+}
+
+.acciones .btn-eliminar-post {
+    cursor: pointer;
+    color: var(--color-danger);
+}
+
+.acciones .btn-eliminar-post:hover {
+    color: #a71d2a;
+}
+
+/* ============================================================
+   BLOQUE 7: SIN PUBLICACIONES
+   ============================================================ */
+.sin-publicaciones {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--color-accent);
+}
+
+.sin-publicaciones i {
+    font-size: 48px;
+    display: block;
+    margin-bottom: 15px;
+    color: #d5ddeb;
+}
+
+.sin-publicaciones .btn-publicar {
+    display: inline-block;
+    padding: 10px 24px;
+    border-radius: 10px;
+    background: var(--color-primary);
+    color: var(--color-white);
+    text-decoration: none;
+    transition: background 0.3s;
+    margin-top: 10px;
+}
+
+.sin-publicaciones .btn-publicar:hover {
+    background: var(--color-primary-dark);
+    color: var(--color-white);
+}
+
+/* ============================================================
+   BLOQUE 8: GALERÍA DE FOTOS
    ============================================================ */
 #galeria-fotos {
     width: 100%;
@@ -190,7 +320,7 @@
 
 #galeria-fotos h2 {
     margin-bottom: 15px;
-    color: #0f2b50;
+    color: var(--color-primary);
     text-align: left;
     font-size: 20px;
 }
@@ -286,28 +416,45 @@
         font-size: 24px;
     }
     
-    .post {
-        margin-top: 25px;
-        padding-bottom: 25px;
-    }
-    
-    .post p {
-        font-size: 15px;
-        line-height: 28px;
-    }
-    
-    .post-versiculo {
+    .grafico-perfil-container {
+        max-width: 500px;
         padding: 20px;
     }
     
-    .post-versiculo p {
-        line-height: 30px;
+    .grafico-perfil-container canvas {
+        max-height: 220px;
+    }
+    
+    .publicacion {
+        padding: 25px;
+        margin-top: 25px;
+    }
+    
+    .publicacion-header img {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .publicacion-autor strong {
+        font-size: 16px;
+    }
+    
+    .publicacion p {
         font-size: 15px;
     }
     
-    .acciones-post {
+    .versiculo {
+        padding: 20px;
+        font-size: 15px;
+    }
+    
+    .acciones {
         gap: 25px;
         font-size: 15px;
+    }
+    
+    .publicacion-imagen {
+        max-height: 400px;
     }
     
     #galeria-fotos {
@@ -340,7 +487,71 @@
         left: 30px;
     }
     
+    .grafico-perfil-container {
+        max-width: 550px;
+    }
+    
+    .grafico-perfil-container canvas {
+        max-height: 240px;
+    }
+    
     .galeria img {
-        height: 500px;
+        height: 350px;
+    }
+}
+
+/* Móviles pequeños */
+@media (max-width: 480px) {
+    .perfil-info img {
+        width: 75px;
+        height: 75px;
+        top: -38px;
+        left: 15px;
+    }
+    
+    .info-general {
+        margin-top: 42px;
+    }
+    
+    .info-general h1 {
+        font-size: 18px;
+    }
+    
+    .info-enlaces {
+        font-size: 12px;
+        gap: 12px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .info-seguimiento {
+        gap: 20px;
+    }
+    
+    .btn-editar {
+        padding: 8px 14px;
+        font-size: 12px;
+    }
+    
+    .grafico-perfil-container {
+        max-width: 100%;
+        padding: 12px;
+    }
+    
+    .grafico-perfil-container canvas {
+        max-height: 160px;
+    }
+    
+    .publicacion {
+        padding: 15px;
+    }
+    
+    .publicacion-imagen {
+        max-height: 200px;
+    }
+    
+    .acciones {
+        gap: 12px;
+        font-size: 13px;
     }
 }

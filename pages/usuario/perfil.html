@@ -31,7 +31,7 @@
         <div class="nav-usuario">
             <button type="button" class="btn btn-light">
                 <a href="perfil.html">
-                    <i class="fa-solid fa-user"></i> jhon32
+                    <i class="fa-solid fa-user"></i> <span id="navUsuario">jhon32</span>
                 </a>
             </button>
             <button type="button" class="btn btn-light">
@@ -47,8 +47,8 @@
             <div class="tarjeta-perfil">
                 <div class="banner-perfil"></div>
                 <div class="perfil-info">
-                    <img src="../../imagenes/Perfil.png" alt="Perfil">
-                    <button class="btn-editar">Editar Perfil</button>
+                    <img src="../../imagenes/Perfil.png" alt="Perfil" id="avatarPerfil">
+                    <button class="btn-editar" id="btnEditarPerfil">Editar Perfil</button>
 
                     <div class="info-general">
                         <h1 id="nombrePerfil">jhon32</h1>
@@ -56,22 +56,24 @@
                         <div class="bio" id="bioPerfil">Estudiante de la Palabra, apasionado por el estudio bíblico profundo.</div>
 
                         <div class="info-enlaces">
-                            <div><i class="fa-solid fa-calendar-days"></i> Se unió en Enero 2026</div>
-                            <div id="nacionalidadPerfil"><i class="fa-solid fa-globe"></i> En todo el mundo</div>
+                            <div><i class="fa-solid fa-calendar-days"></i> Se unió en <span id="fechaRegistro">Enero 2026</span></div>
+                            <div id="nacionalidadPerfil" class="bandera-pais">
+                                <i class="fa-solid fa-globe"></i> <span id="paisNombre">En todo el mundo</span>
+                            </div>
                         </div>
 
                         <div class="info-seguimiento">
                             <div class="stat">
                                 <div class="stat-label">Publicaciones</div>
-                                <div class="stat-valor" id="statPublicaciones">24</div>
+                                <div class="stat-valor" id="statPublicaciones">0</div>
                             </div>
                             <div class="stat">
                                 <div class="stat-label">Seguidores</div>
-                                <div class="stat-valor">156</div>
+                                <div class="stat-valor" id="statSeguidores">0</div>
                             </div>
                             <div class="stat">
                                 <div class="stat-label">Siguiendo</div>
-                                <div class="stat-valor">89</div>
+                                <div class="stat-valor" id="statSiguiendo">0</div>
                             </div>
                         </div>
                     </div>
@@ -80,44 +82,20 @@
         </section>
 
         <section class="publicaciones-perfil">
-            <h2>Mis Publicaciones</h2>
+            <h2><i class="fa-solid fa-pen"></i> Mis Publicaciones</h2>
 
-            <div class="grafico-contenedor">
+            <div class="grafico-perfil-container">
                 <canvas id="graficoPerfil"></canvas>
             </div>
 
-            <!-- Publicaciones propias generadas dinámicamente (Commit 2 y 4) -->
             <div id="listaMisPublicaciones"></div>
-        </section>
-
-        <section id="galeria-fotos">
-            <h2>Fotos Subidas</h2>
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 galeria">
-                <div class="col">
-                    <img class="imagenes-subidas" src="../../imagenes/Snoppy.jpg" alt="Foto 1">
-                </div>
-                <div class="col">
-                    <img class="imagenes-subidas" src="../../imagenes/atardecer1.jpg" alt="Foto 2">
-                </div>
-                <div class="col">
-                    <img class="imagenes-subidas" src="../../imagenes/atardecer1.jpg" alt="Foto 3">
-                </div>
-                <div class="col">
-                    <img class="imagenes-subidas" src="../../imagenes/atardecer.jpg" alt="Foto 4">
-                </div>
-                <div class="col">
-                    <img class="imagenes-subidas" src="../../imagenes/atardecer1.jpg" alt="Foto 5">
-                </div>
-                <div class="col">
-                    <img class="imagenes-subidas" src="../../imagenes/atardecer1.jpg" alt="Foto 6">
-                </div>
-            </div>
         </section>
     </main>
 
     <footer>
         <p>&copy; 2026 Daat Devotional - Todos los derechos reservados</p>
     </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
