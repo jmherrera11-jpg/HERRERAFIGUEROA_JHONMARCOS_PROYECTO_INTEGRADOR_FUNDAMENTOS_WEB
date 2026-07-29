@@ -1,9 +1,5 @@
 // ============================================================
 // js/foros.js
-// COMMIT 2: carga dinámica de temas (se reutiliza publicaciones.json)
-// COMMIT 3: búsqueda en tiempo real y filtro por categoría
-// COMMIT 4: creación de nuevos temas (CRUD)
-// COMMIT 7: likes, comentarios y eliminar temas
 // ============================================================
 
 let temasForo = [];

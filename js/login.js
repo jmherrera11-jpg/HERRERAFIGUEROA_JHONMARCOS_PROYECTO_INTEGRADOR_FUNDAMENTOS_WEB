@@ -1,6 +1,6 @@
 // ============================================================
 // js/login.js
-// COMMIT 2: autenticación contra los usuarios cargados desde JSON
+// Autenticación contra los usuarios cargados desde JSON
 // ============================================================
 
 let temporizadores = {};

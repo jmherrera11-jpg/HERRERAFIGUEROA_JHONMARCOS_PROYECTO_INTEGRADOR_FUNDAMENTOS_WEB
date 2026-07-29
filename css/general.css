@@ -130,7 +130,7 @@ footer {
 }
 
 /* ============================================================
-   BLOQUE 4: MENÚ DE NAVEGACIÓN
+   BLOQUE 4: MENÚ DE NAVEGACIÓN (MEJORADO)
    ============================================================ */
 nav {
     display: flex;
@@ -158,34 +158,91 @@ nav {
     gap: 8px;
 }
 
-.nav-links a {
-    font-size: 13px;
-    padding: 6px 12px;
-    white-space: nowrap;
+.nav-links .btn-light {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    transition: all 0.3s ease;
+}
+
+.nav-links .btn-light a {
+    display: block;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
     color: var(--color-text-light);
-}
-
-.nav-links a:hover {
-    color: var(--color-primary-dark);
-    font-weight: bold;
     text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: 500;
 }
 
+/* ============================================================
+   HOVER AZUL OSCURO PARA LA NAVEGACIÓN
+   ============================================================ */
+.nav-links .btn-light a:hover {
+    background-color: var(--color-primary-dark);
+    color: var(--color-white);
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+.nav-links .btn-light a:active {
+    transform: scale(0.97);
+}
+
+/* ============================================================
+   BOTÓN DE USUARIO EN LA NAVEGACIÓN
+   ============================================================ */
 .nav-usuario {
     display: flex;
     gap: 8px;
     align-items: center;
 }
 
-.nav-usuario a {
-    font-size: 13px;
-    padding: 6px 12px;
-    color: var(--color-text-light);
+.nav-usuario .btn-light {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    transition: all 0.3s ease;
 }
 
-.nav-usuario a:hover {
-    color: var(--color-primary-dark);
+.nav-usuario .btn-light a {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--color-text-light);
     text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.nav-usuario .btn-light a i {
+    font-size: 15px;
+}
+
+/* Hover azul oscuro para el botón de usuario */
+.nav-usuario .btn-light a:hover {
+    background-color: var(--color-primary-dark);
+    color: var(--color-white);
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+.nav-usuario .btn-light a:active {
+    transform: scale(0.97);
+}
+
+/* Botón de cerrar sesión (icono) */
+.nav-usuario .btn-light .nav-salir {
+    padding: 8px 12px;
+}
+
+.nav-usuario .btn-light .nav-salir:hover {
+    background-color: var(--color-danger);
+    color: var(--color-white);
 }
 
 nav img {
@@ -373,20 +430,21 @@ tbody tr:hover {
     nav {
         flex-direction: row;
         justify-content: space-between;
-        padding: 15px 30px;
+        padding: 12px 30px;
     }
     
     .nav-links {
         gap: 15px;
     }
     
-    .nav-links a {
+    .nav-links .btn-light a {
         font-size: 15px;
-        padding: 8px 16px;
+        padding: 8px 18px;
     }
     
-    .nav-usuario a {
+    .nav-usuario .btn-light a {
         font-size: 15px;
+        padding: 8px 18px;
     }
     
     footer {
@@ -404,16 +462,21 @@ tbody tr:hover {
     }
     
     nav {
-        padding: 15px 40px;
+        padding: 12px 40px;
     }
     
     .nav-links {
-        gap: 25px;
+        gap: 20px;
     }
     
-    .nav-links a {
+    .nav-links .btn-light a {
         font-size: 16px;
-        padding: 10px 20px;
+        padding: 10px 22px;
+    }
+    
+    .nav-usuario .btn-light a {
+        font-size: 16px;
+        padding: 10px 22px;
     }
     
     article {

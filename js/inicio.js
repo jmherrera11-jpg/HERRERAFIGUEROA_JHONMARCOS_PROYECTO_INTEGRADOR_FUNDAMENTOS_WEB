@@ -425,7 +425,7 @@ function crearGraficoCategorias() {
 
     if (datos.labels.length === 0) {
         document.getElementById("graficoContainer").querySelector("h4").textContent = 
-            "📊 Publicaciones por categoría (sin datos)";
+            "Publicaciones por categoría (sin datos)";
         return;
     }
 

@@ -9,33 +9,34 @@ let graficoPerfil = null;
 let listaPaises = [];
 
 document.addEventListener("DOMContentLoaded", async function () {
-    console.log("🔵 Perfil: DOM cargado");
+    console.log("Perfil: DOM cargado");
 
     await iniciarPaginaInterna("../../json/");
-    console.log("🔵 Perfil: iniciarPaginaInterna completado");
+    console.log("Perfil: iniciarPaginaInterna completado");
 
     publicacionesPerfil = DaatStorage.obtener("publicaciones");
     categoriasPerfil = DaatStorage.obtener("categorias");
     usuariosPerfil = DaatStorage.obtener("usuarios");
 
-    console.log("🔵 Perfil: publicaciones cargadas:", publicacionesPerfil.length);
-    console.log("🔵 Perfil: usuarios cargados:", usuariosPerfil.length);
+    console.log("Perfil: publicaciones cargadas:", publicacionesPerfil.length);
+    console.log("Perfil: usuarios cargados:", usuariosPerfil.length);
 
     await cargarPaises();
 
     const usuario = DaatStorage.usuarioActual();
-    console.log("🔵 Perfil: usuario actual desde storage:", usuario);
+    console.log("Perfil: usuario actual desde storage:", usuario);
 
     if (!usuario) {
-        console.log("🔴 Perfil: No hay usuario, redirigiendo a login");
+        console.log("Perfil: No hay usuario, redirigiendo a login");
         window.location.href = "../formularios/login.html";
         return;
     }
 
-    console.log("🔵 Perfil: Usuario encontrado -", usuario.nombre, usuario.apellido);
+    console.log("Perfil: Usuario encontrado -", usuario.nombre, usuario.apellido);
 
     pintarInfoUsuario();
     renderizarMisPublicaciones();
+    renderizarGaleriaImagenes();
     crearGraficoPerfil();
 
     document.getElementById("listaMisPublicaciones").addEventListener("click", function (evento) {
@@ -55,30 +56,24 @@ async function cargarPaises() {
         if (!respuesta.ok) throw new Error("Error al cargar países");
         const datos = await respuesta.json();
         listaPaises = Array.isArray(datos) ? datos : (datos.data || []);
-        console.log("🔵 Perfil: Países cargados:", listaPaises.length);
+        console.log("Perfil: Países cargados:", listaPaises.length);
     } catch (error) {
         console.error("Error al cargar países:", error);
         listaPaises = [];
     }
 }
 
-// ============================================================
-// FUNCIÓN CORREGIDA - MANEJO SEGURO DE PAÍSES
-// ============================================================
 function obtenerBanderaPais(nombrePais) {
     if (!listaPaises || listaPaises.length === 0) return null;
     if (!nombrePais || nombrePais === "En todo el mundo") return null;
     
     try {
-        // Buscar el país por nombre común (ignorando mayúsculas/minúsculas)
         const pais = listaPaises.find(function(p) {
             if (!p || !p.name) return false;
-            // Algunos países tienen name como string, otros como objeto
             const nombre = typeof p.name === 'string' ? p.name : (p.name.common || '');
             return nombre.toLowerCase() === nombrePais.toLowerCase();
         });
         
-        // Si no se encontró, intentar búsqueda parcial
         if (!pais) {
             const paisParcial = listaPaises.find(function(p) {
                 if (!p || !p.name) return false;
@@ -98,51 +93,35 @@ function obtenerBanderaPais(nombrePais) {
 
 function pintarInfoUsuario() {
     const usuario = DaatStorage.usuarioActual();
-    console.log("🔵 pintarInfoUsuario: usuario =", usuario);
 
     if (!usuario) {
-        console.log("🔴 pintarInfoUsuario: No hay usuario");
         window.location.href = "../formularios/login.html";
         return;
     }
 
-    console.log("🔵 pintarInfoUsuario: Mostrando info de", usuario.nombre);
-
-    // Actualizar nav
     const navUsuario = document.getElementById("navUsuario");
     if (navUsuario) {
         navUsuario.textContent = usuario.nombre.toLowerCase() + usuario.apellido.charAt(0).toLowerCase();
     }
 
-    // Información básica
-    const nombreEl = document.getElementById("nombrePerfil");
-    const usuarioEl = document.getElementById("usuarioPerfil");
-    const bioEl = document.getElementById("bioPerfil");
+    document.getElementById("nombrePerfil").textContent = usuario.nombre + " " + usuario.apellido;
+    document.getElementById("usuarioPerfil").textContent = "@" + usuario.email.split("@")[0];
+    document.getElementById("bioPerfil").textContent = usuario.biografia || "Miembro de la comunidad Daat Devotional.";
 
-    if (nombreEl) nombreEl.textContent = usuario.nombre + " " + usuario.apellido;
-    if (usuarioEl) usuarioEl.textContent = "@" + usuario.email.split("@")[0];
-    if (bioEl) bioEl.textContent = usuario.biografia || "Miembro de la comunidad Daat Devotional.";
-
-    // Avatar
     const avatar = document.querySelector(".perfil-info > img");
     if (avatar && usuario.avatar) {
         avatar.src = usuario.avatar;
     }
 
-    // Fecha de registro
     if (usuario.fechaRegistro) {
         const fecha = new Date(usuario.fechaRegistro + "T00:00:00");
         const fechaStr = fecha.toLocaleDateString('es-ES', {
             month: 'long',
             year: 'numeric'
         });
-        const fechaEl = document.getElementById("fechaRegistro");
-        if (fechaEl) fechaEl.textContent = fechaStr.charAt(0).toUpperCase() + fechaStr.slice(1);
+        document.getElementById("fechaRegistro").textContent = fechaStr.charAt(0).toUpperCase() + fechaStr.slice(1);
     }
 
-    // ============================================================
-    // NACIONALIDAD CON BANDERA (MANEJO SEGURO)
-    // ============================================================
     const paisNombre = usuario.nacionalidad || "En todo el mundo";
     const nacionalidadDiv = document.getElementById("nacionalidadPerfil");
     
@@ -150,58 +129,39 @@ function pintarInfoUsuario() {
         const paisInfo = obtenerBanderaPais(paisNombre);
         
         if (paisInfo && paisInfo.flags && paisInfo.flags.png) {
-            // Mostrar bandera desde la API
             nacionalidadDiv.innerHTML = `
                 <img src="${paisInfo.flags.png}" alt="Bandera de ${paisInfo.name.common}" style="width:24px;height:16px;border-radius:3px;object-fit:cover;border:1px solid #e0e0e0;">
                 <span>${paisInfo.name.common}</span>
             `;
         } else if (paisInfo && paisInfo.flag) {
-            // Si solo tiene el emoji de bandera
             nacionalidadDiv.innerHTML = `<span>${paisInfo.flag} ${paisNombre}</span>`;
         } else {
-            // Fallback: solo texto
             nacionalidadDiv.innerHTML = `<i class="fa-solid fa-globe"></i> <span>${paisNombre}</span>`;
         }
     }
 
-    // ============================================================
-    // ESTADÍSTICAS
-    // ============================================================
     const misPosts = publicacionesPerfil.filter(function (p) { 
         return p.usuarioId === usuario.id && (p.estado === "publicado" || !p.estado); 
     });
-    console.log("🔵 Publicaciones de", usuario.nombre, ":", misPosts.length);
 
-    const statPub = document.getElementById("statPublicaciones");
-    if (statPub) statPub.textContent = misPosts.length;
-    
-    const statSeg = document.getElementById("statSeguidores");
-    if (statSeg) statSeg.textContent = Math.floor(Math.random() * 100) + 20;
-    
-    const statSig = document.getElementById("statSiguiendo");
-    if (statSig) statSig.textContent = Math.floor(Math.random() * 80) + 10;
+    document.getElementById("statPublicaciones").textContent = misPosts.length;
+    document.getElementById("statSeguidores").textContent = Math.floor(Math.random() * 100) + 20;
+    document.getElementById("statSiguiendo").textContent = Math.floor(Math.random() * 80) + 10;
 }
 
 // ============================================================
-// RENDERIZAR PUBLICACIONES
+// RENDERIZAR PUBLICACIONES DEL USUARIO
 // ============================================================
 function renderizarMisPublicaciones() {
     const usuario = DaatStorage.usuarioActual();
     const contenedor = document.getElementById("listaMisPublicaciones");
     contenedor.innerHTML = "";
 
-    console.log("🔵 renderizarMisPublicaciones: usuario =", usuario);
-
-    if (!usuario) {
-        console.log("🔴 renderizarMisPublicaciones: No hay usuario");
-        return;
-    }
+    if (!usuario) return;
 
     const misPosts = publicacionesPerfil.filter(function (p) { 
         return p.usuarioId === usuario.id && (p.estado === "publicado" || !p.estado); 
     });
-
-    console.log("🔵 renderizarMisPublicaciones: posts encontrados =", misPosts.length);
 
     misPosts.sort(function(a, b) {
         return new Date(b.fecha) - new Date(a.fecha);
@@ -284,6 +244,106 @@ function crearTarjetaPublicacion(publicacion) {
 }
 
 // ============================================================
+// RENDERIZAR GALERÍA DE IMÁGENES (grid)
+// ============================================================
+function renderizarGaleriaImagenes() {
+    const usuario = DaatStorage.usuarioActual();
+    const contenedor = document.getElementById("galeriaContainer");
+    contenedor.innerHTML = "";
+
+    if (!usuario) return;
+
+    // Obtener publicaciones del usuario que tienen imagen
+    const misPosts = publicacionesPerfil.filter(function (p) { 
+        return p.usuarioId === usuario.id && 
+               (p.estado === "publicado" || !p.estado) &&
+               p.imagen && 
+               p.imagen.trim() !== '' && 
+               p.imagen !== 'null' && 
+               p.imagen !== 'undefined';
+    });
+
+    if (misPosts.length === 0) {
+        contenedor.innerHTML = `
+            <div class="sin-imagenes">
+                <i class="fa-solid fa-image"></i>
+                <p>No has subido imágenes en tus publicaciones aún.</p>
+                <small class="text-muted">Las imágenes que compartas aparecerán aquí</small>
+            </div>
+        `;
+        return;
+    }
+
+    // Mostrar imágenes en grid
+    misPosts.forEach(function (post) {
+        const item = document.createElement("div");
+        item.className = "galeria-item";
+
+        // Extraer solo el nombre del archivo para el alt
+        const nombreImagen = post.titulo || "Imagen de publicación";
+
+        item.innerHTML = `
+            <img src="${post.imagen}" alt="${nombreImagen}" loading="lazy" onerror="this.parentElement.style.display='none'">
+            <div class="galeria-overlay">
+                <span>${post.titulo || 'Publicación'}</span>
+                <small>${formatearFecha(post.fecha)}</small>
+            </div>
+        `;
+
+        // Al hacer click en la imagen, abrir el modal de la publicación
+        item.addEventListener("click", function() {
+            // Buscar la publicación completa y abrir detalles
+            const publicacionCompleta = publicacionesPerfil.find(function(p) {
+                return p.id === post.id;
+            });
+            if (publicacionCompleta) {
+                // Mostrar SweetAlert con la publicación
+                const autor = buscarPorId(usuariosPerfil, publicacionCompleta.usuarioId);
+                const nombreAutor = autor ? autor.nombre + " " + autor.apellido : "Usuario";
+                const fechaTexto = formatearFecha(publicacionCompleta.fecha);
+                
+                let contenidoHTML = `
+                    <div style="text-align:left;max-height:400px;overflow-y:auto;">
+                        <p><strong>${publicacionCompleta.titulo || 'Publicación'}</strong></p>
+                        <p>${publicacionCompleta.contenido}</p>
+                `;
+                
+                if (publicacionCompleta.versiculo) {
+                    contenidoHTML += `
+                        <div style="background:#dbe6f5;padding:12px 16px;border-radius:8px;border-left:4px solid #324d82;margin:10px 0;">
+                            <i>"${publicacionCompleta.versiculo}"</i>
+                            <div style="font-weight:bold;margin-top:4px;">${publicacionCompleta.referencia}</div>
+                        </div>
+                    `;
+                }
+                
+                if (publicacionCompleta.imagen) {
+                    contenidoHTML += `
+                        <img src="${publicacionCompleta.imagen}" alt="${publicacionCompleta.titulo}" style="width:100%;max-height:300px;object-fit:cover;border-radius:8px;margin-top:10px;">
+                    `;
+                }
+                
+                contenidoHTML += `
+                        <p style="font-size:12px;color:#5b7db6;margin-top:10px;">${nombreAutor} · ${fechaTexto}</p>
+                        <p style="font-size:13px;color:#5b7db6;"><i class="fa-regular fa-heart"></i> ${publicacionCompleta.likes} · <i class="fa-regular fa-comment"></i> ${publicacionCompleta.comentarios}</p>
+                    </div>
+                `;
+
+                Swal.fire({
+                    title: '<i class="fa-solid fa-camera"></i> ' + (publicacionCompleta.titulo || 'Publicación'),
+                    html: contenidoHTML,
+                    width: 600,
+                    confirmButtonText: 'Cerrar',
+                    confirmButtonColor: '#324d82'
+                });
+            }
+        });
+
+        contenedor.appendChild(item);
+    });
+}
+
+// ============================================================
 // CRUD - ELIMINAR, EDITAR
 // ============================================================
 function confirmarEliminarPost(id) {
@@ -300,6 +360,7 @@ function confirmarEliminarPost(id) {
             DaatStorage.guardar("publicaciones", publicacionesPerfil);
             pintarInfoUsuario();
             renderizarMisPublicaciones();
+            renderizarGaleriaImagenes();
             actualizarGraficoPerfil();
             notificar("Publicación eliminada.", "exito");
         }
@@ -339,6 +400,7 @@ function editarPost(id) {
             post.referencia = resultado.value.referencia || "";
             DaatStorage.guardar("publicaciones", publicacionesPerfil);
             renderizarMisPublicaciones();
+            renderizarGaleriaImagenes();
             notificar("Publicación actualizada.", "exito");
         }
     });

@@ -1,6 +1,6 @@
 // ============================================================
 // js/registro.js
-// COMMIT 5: registro de usuarios + integración de la API de países
+// Registro de usuarios + integración de la API de países
 // ============================================================
 
 let listaPaises = [];
@@ -69,7 +69,7 @@ async function cargarPaises() {
             selectNacionalidad.appendChild(opcion);
         }
 
-        console.log("✅ Países cargados:", listaPaises.length);
+        console.log(" Países cargados:", listaPaises.length);
 
     } catch (error) {
         console.error("Error al cargar países:", error);

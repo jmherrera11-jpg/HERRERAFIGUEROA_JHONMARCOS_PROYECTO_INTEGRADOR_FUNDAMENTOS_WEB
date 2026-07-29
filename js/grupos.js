@@ -1,8 +1,5 @@
 // ============================================================
 // js/grupos.js
-// COMMIT 2: carga dinámica de grupos (se reutiliza categorias.json)
-// COMMIT 3: búsqueda en tiempo real y filtro por categoría
-// COMMIT 4: unirse / abandonar / crear grupo (CRUD + localStorage)
 // ============================================================
 
 let categoriasGrupos = [];

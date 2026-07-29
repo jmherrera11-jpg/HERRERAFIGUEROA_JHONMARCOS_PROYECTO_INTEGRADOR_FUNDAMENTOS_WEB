@@ -555,3 +555,134 @@
         font-size: 13px;
     }
 }
+
+/* ============================================================
+   BLOQUE 9: GALERÍA DE IMÁGENES DEL USUARIO (grid)
+   ============================================================ */
+#galeria-usuario {
+    width: 100%;
+    margin: 20px auto;
+    background-color: var(--color-white);
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+#galeria-usuario h2 {
+    color: var(--color-text);
+    margin-top: 0;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.galeria-grid .galeria-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    aspect-ratio: 1 / 1;
+    background: var(--color-primary-light);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.galeria-grid .galeria-item:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    z-index: 2;
+}
+
+.galeria-grid .galeria-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.galeria-grid .galeria-item .galeria-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 12px;
+    background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+    color: white;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.galeria-grid .galeria-item:hover .galeria-overlay {
+    opacity: 1;
+}
+
+.galeria-grid .galeria-item .galeria-overlay small {
+    display: block;
+    font-size: 11px;
+    opacity: 0.8;
+}
+
+/* Mensaje cuando no hay imágenes */
+.sin-imagenes {
+    text-align: center;
+    padding: 30px 20px;
+    color: var(--color-accent);
+    grid-column: 1 / -1;
+}
+
+.sin-imagenes i {
+    font-size: 40px;
+    display: block;
+    margin-bottom: 10px;
+    color: #d5ddeb;
+}
+
+.sin-imagenes p {
+    margin: 0;
+    color: var(--color-accent);
+}
+
+/* ============================================================
+   MEDIA QUERIES - GALERÍA
+   ============================================================ */
+
+@media (min-width: 576px) {
+    .galeria-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+    }
+}
+
+@media (min-width: 768px) {
+    #galeria-usuario {
+        padding: 25px;
+    }
+    
+    #galeria-usuario h2 {
+        font-size: 24px;
+    }
+    
+    .galeria-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+    }
+}
+
+@media (min-width: 992px) {
+    .galeria-grid {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .galeria-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+}

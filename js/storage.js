@@ -1,7 +1,6 @@
 // ============================================================
 // js/storage.js
 // Módulo central de datos de Daat Devotional.
-// COMMIT 2: implementación de carga dinámica con fetch
 //
 // Responsabilidad de este archivo:
 //  - Cargar publicaciones, usuarios y categorías desde /json/*.json
@@ -60,10 +59,10 @@ const DaatStorage = (function () {
     }
   }
 
-  function obtener(clave) {
-    const datos = localStorage.getItem(CLAVES[clave]);
-    return datos ? JSON.parse(datos) : [];
-  }
+    function obtener(clave) {
+      const datos = localStorage.getItem(CLAVES[clave]);
+      return datos ? JSON.parse(datos) : [];
+    }
 
   function guardar(clave, arreglo) {
     localStorage.setItem(CLAVES[clave], JSON.stringify(arreglo));

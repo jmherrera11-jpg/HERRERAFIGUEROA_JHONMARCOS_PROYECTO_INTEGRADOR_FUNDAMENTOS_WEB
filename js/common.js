@@ -18,15 +18,37 @@ async function iniciarPaginaInterna(rutaJson) {
     const usuarios = DaatStorage.obtener("usuarios");
     if (usuarios.length > 0) {
       DaatStorage.guardarUsuarioActual(usuarios[0]);
+      usuario = usuarios[0];
     }
   }
 
+  // ACTUALIZAR EL NOMBRE DEL USUARIO EN LA NAVEGACIÓN
+  actualizarNombreUsuario(usuario);
+
   // Conecta el botón de "cerrar sesión" del nav en todas las páginas.
   document.querySelectorAll(".nav-salir").forEach(function (enlace) {
-    enlace.addEventListener("click", function () {
+    enlace.addEventListener("click", function (e) {
+      e.preventDefault();
       DaatStorage.cerrarSesion();
+      window.location.href = "../../index.html";
     });
   });
+}
+
+// ============================================================
+// FUNCIÓN PARA ACTUALIZAR EL NOMBRE DEL USUARIO EN EL NAV
+// ============================================================
+function actualizarNombreUsuario(usuario) {
+  const navUsuario = document.getElementById("navUsuario");
+  if (!navUsuario) return;
+
+  if (usuario) {
+    // Generar nombre de usuario: nombre + inicial del apellido
+    const nombreUsuario = usuario.nombre.toLowerCase() + usuario.apellido.charAt(0).toLowerCase();
+    navUsuario.textContent = nombreUsuario;
+  } else {
+    navUsuario.textContent = "invitado";
+  }
 }
 
 // Convierte "2026-07-20" en "20 de julio de 2026"
