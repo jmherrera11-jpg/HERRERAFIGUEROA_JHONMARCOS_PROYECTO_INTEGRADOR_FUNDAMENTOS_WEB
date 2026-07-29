@@ -4,173 +4,358 @@
 // ============================================================
 
 let listaPaises = [];
+let temporizadores = {};
 
+// ============================================================
+// 1. SELECCIONAR ELEMENTOS DEL DOM
+// ============================================================
+const formRegistro = document.getElementById("formRegistro");
+const inputNombre = document.getElementById("nombre");
+const inputApellido = document.getElementById("apellido");
+const inputEmail = document.getElementById("email");
+const inputPassword = document.getElementById("password");
+const inputConfirm = document.getElementById("confirmPassword");
+const selectNacionalidad = document.getElementById("nacionalidad");
+const inputFecha = document.getElementById("fechaNacimiento");
+const checkboxTerminos = document.getElementById("terminos");
+
+const estadoNombre = document.getElementById("estadoNombre");
+const estadoApellido = document.getElementById("estadoApellido");
+const estadoEmail = document.getElementById("estadoEmail");
+const estadoPassword = document.getElementById("estadoPassword");
+const estadoConfirm = document.getElementById("estadoConfirm");
+
+// ============================================================
+// 2. INICIALIZAR
+// ============================================================
 document.addEventListener("DOMContentLoaded", async function () {
-  await DaatStorage.init("../../json/");
-  await cargarPaises();
-  configurarSelectorPaises();
-  configurarValidacionRegistro();
+    await iniciarPaginaInterna("../../json/");
+    await cargarPaises();
+    configurarEventos();
 });
 
-// Consulta la API de países. Si la API no responde (caída, sin
-// conexión, CORS, etc.) se usa una lista de respaldo para que el
-// formulario nunca quede bloqueado.
+// ============================================================
+// 3. CARGAR PAÍSES CON ASYNC/AWAIT
+// ============================================================
 async function cargarPaises() {
-  try {
-    const respuesta = await fetch("https://countries.dev/countries");
+    try {
+        selectNacionalidad.innerHTML = '<option value="">Cargando países...</option>';
 
-    if (!respuesta.ok) {
-      throw new Error("Respuesta no válida de la API de países");
+        const respuesta = await fetch("https://countries.dev/countries");
+
+        if (!respuesta.ok) {
+            throw new Error("No se pudo obtener el listado de países.");
+        }
+
+        const datos = await respuesta.json();
+        listaPaises = Array.isArray(datos) ? datos : (datos.data || []);
+
+        if (listaPaises.length === 0) {
+            throw new Error("La lista de países está vacía.");
+        }
+
+        selectNacionalidad.innerHTML = '<option value="">Seleccione su país...</option>';
+
+        listaPaises.sort(function(a, b) {
+            const nombreA = a.name.common || "";
+            const nombreB = b.name.common || "";
+            return nombreA.localeCompare(nombreB);
+        });
+
+        for (const pais of listaPaises) {
+            const opcion = document.createElement("option");
+            opcion.value = pais.name.common;
+            opcion.textContent = (pais.flag || "🏳️") + " " + pais.name.common;
+            selectNacionalidad.appendChild(opcion);
+        }
+
+        console.log("✅ Países cargados:", listaPaises.length);
+
+    } catch (error) {
+        console.error("Error al cargar países:", error);
+        selectNacionalidad.innerHTML = `
+            <option value="">Error al cargar países</option>
+            <option value="Ecuador">🇪🇨 Ecuador</option>
+            <option value="Colombia">🇨🇴 Colombia</option>
+            <option value="Perú">🇵🇪 Perú</option>
+            <option value="México">🇲🇽 México</option>
+            <option value="España">🇪🇸 España</option>
+            <option value="Argentina">🇦🇷 Argentina</option>
+            <option value="Chile">🇨🇱 Chile</option>
+            <option value="Venezuela">🇻🇪 Venezuela</option>
+            <option value="Bolivia">🇧🇴 Bolivia</option>
+            <option value="Uruguay">🇺🇾 Uruguay</option>
+        `;
+        notificar("No se pudo conectar con la API de países, se usó una lista local.", "info");
     }
-
-    const datos = await respuesta.json();
-    listaPaises = Array.isArray(datos) ? datos : (datos.data || []);
-
-    if (listaPaises.length === 0) {
-      throw new Error("La API devolvió una lista vacía");
-    }
-  } catch (error) {
-    console.error("No se pudo cargar la lista de países desde la API:", error);
-    listaPaises = paisesRespaldo();
-    notificar("No se pudo conectar con la API de países, se usó una lista local.", "info");
-  }
 }
 
-function paisesRespaldo() {
-  return [
-    { name: { common: "Ecuador" }, flag: "🇪🇨" },
-    { name: { common: "Colombia" }, flag: "🇨🇴" },
-    { name: { common: "Perú" }, flag: "🇵🇪" },
-    { name: { common: "México" }, flag: "🇲🇽" },
-    { name: { common: "España" }, flag: "🇪🇸" },
-    { name: { common: "Estados Unidos" }, flag: "🇺🇸" },
-    { name: { common: "Argentina" }, flag: "🇦🇷" },
-    { name: { common: "Chile" }, flag: "🇨🇱" },
-    { name: { common: "Venezuela" }, flag: "🇻🇪" },
-    { name: { common: "Bolivia" }, flag: "🇧🇴" }
-  ];
-}
-
-// Selector personalizado de país: campo de búsqueda + lista desplegable.
-function configurarSelectorPaises() {
-  const inputBuscar = document.getElementById("buscarPais");
-  const listaContenedor = document.getElementById("listaPaises");
-  const inputOculto = document.getElementById("nacionalidad");
-  const selector = document.getElementById("selectorPaises");
-
-  listaContenedor.style.display = "none";
-  listaContenedor.style.position = "relative";
-  listaContenedor.style.zIndex = "10";
-
-  function pintarOpciones(filtro) {
-    const texto = filtro.trim().toLowerCase();
-
-    const coincidencias = listaPaises.filter(function (pais) {
-      return pais.name.common.toLowerCase().includes(texto);
-    }).slice(0, 15);
-
-    listaContenedor.innerHTML = "";
-
-    coincidencias.forEach(function (pais) {
-      const opcion = document.createElement("div");
-      opcion.className = "opcion-pais";
-      opcion.style.cursor = "pointer";
-      opcion.style.padding = "6px 10px";
-      opcion.textContent = (pais.flag ? pais.flag + " " : "") + pais.name.common;
-
-      opcion.addEventListener("click", function () {
-        inputBuscar.value = pais.name.common;
-        inputOculto.value = pais.name.common;
-        listaContenedor.style.display = "none";
-      });
-
-      listaContenedor.appendChild(opcion);
+// ============================================================
+// 4. CONFIGURAR EVENTOS
+// ============================================================
+function configurarEventos() {
+    // Evento input para "Escribiendo..." con íconos
+    inputNombre.addEventListener("input", function() {
+        mostrarEscribiendo("estadoNombre", 'Escribiendo nombre...');
     });
 
-    listaContenedor.style.display = coincidencias.length > 0 ? "block" : "none";
-  }
+    inputApellido.addEventListener("input", function() {
+        mostrarEscribiendo("estadoApellido", 'Escribiendo apellido...');
+    });
 
-  inputBuscar.addEventListener("input", function () {
-    inputOculto.value = "";
-    pintarOpciones(inputBuscar.value);
-  });
+    inputEmail.addEventListener("input", function() {
+        mostrarEscribiendo("estadoEmail", 'Escribiendo correo...');
+    });
 
-  inputBuscar.addEventListener("focus", function () {
-    pintarOpciones(inputBuscar.value);
-  });
+    inputPassword.addEventListener("input", function() {
+        mostrarEscribiendo("estadoPassword", 'Escribiendo contraseña...');
+        validarContraseña();
+    });
 
-  document.addEventListener("click", function (evento) {
-    if (!selector.contains(evento.target)) {
-      listaContenedor.style.display = "none";
-    }
-  });
+    inputConfirm.addEventListener("input", function() {
+        mostrarEscribiendo("estadoConfirm", 'Confirmando contraseña...');
+        validarConfirmacion();
+    });
+
+    formRegistro.addEventListener("submit", function(evento) {
+        evento.preventDefault();
+        procesarRegistro();
+    });
 }
 
-function configurarValidacionRegistro() {
-  const formulario = document.getElementById("formRegistro");
+// ============================================================
+// 5. FUNCIÓN "ESCRIBIENDO..." CON ÍCONOS
+// ============================================================
+function mostrarEscribiendo(elementoId, mensaje) {
+    const elemento = document.getElementById(elementoId);
+    if (!elemento) return;
 
-  formulario.addEventListener("submit", function (evento) {
-    evento.preventDefault();
+    elemento.innerHTML = mensaje;
+    elemento.style.color = "#0d6efd";
+    elemento.style.fontSize = "13px";
 
-    const nombre = document.getElementById("nombre").value.trim();
-    const apellido = document.getElementById("apellido").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value;
-    const confirmar = document.getElementById("confirmPassword").value;
-    const fechaNacimiento = document.getElementById("fechaNacimiento").value;
-    const nacionalidad = document.getElementById("nacionalidad").value;
-    const terminos = document.getElementById("terminos").checked;
-
-    if (nacionalidad === "") {
-      Swal.fire("Falta información", "Selecciona tu nacionalidad de la lista desplegable.", "warning");
-      return;
+    if (temporizadores[elementoId]) {
+        clearTimeout(temporizadores[elementoId]);
     }
 
-    if (password !== confirmar) {
-      Swal.fire("Las contraseñas no coinciden", "Verifica que ambas contraseñas sean iguales.", "warning");
-      return;
+    temporizadores[elementoId] = setTimeout(function() {
+        elemento.innerHTML = "";
+    }, 1500);
+}
+
+// ============================================================
+// 6. MOSTRAR MENSAJES CON ÍCONOS (validación)
+// ============================================================
+function mostrarMensaje(elementoId, mensaje, tipo) {
+    const elemento = document.getElementById(elementoId);
+    if (!elemento) return;
+
+    const iconos = {
+        exito: '<i class="fa-solid fa-circle-check" style="color:#198754;"></i>',
+        error: '<i class="fa-solid fa-circle-exclamation" style="color:#dc3545;"></i>',
+        advertencia: '<i class="fa-solid fa-triangle-exclamation" style="color:#ffc107;"></i>',
+        info: '<i class="fa-solid fa-circle-info" style="color:#0d6efd;"></i>'
+    };
+
+    const colores = {
+        exito: "#198754",
+        error: "#dc3545",
+        advertencia: "#ffc107",
+        info: "#0d6efd"
+    };
+
+    elemento.innerHTML = iconos[tipo] + ' ' + mensaje;
+    elemento.style.color = colores[tipo];
+    elemento.style.fontSize = "13px";
+    elemento.style.fontWeight = "500";
+}
+
+function limpiarMensaje(elementoId) {
+    const elemento = document.getElementById(elementoId);
+    if (elemento) {
+        elemento.innerHTML = "";
+    }
+}
+
+// ============================================================
+// 7. VALIDACIONES EN TIEMPO REAL CON ÍCONOS
+// ============================================================
+function validarContraseña() {
+    const password = inputPassword.value;
+
+    if (password.length === 0) {
+        limpiarMensaje("estadoPassword");
+        return;
+    }
+
+    if (password.length < 8) {
+        mostrarMensaje(
+            "estadoPassword",
+            "La contraseña debe tener al menos 8 caracteres.",
+            "error"
+        );
+    } else {
+        mostrarMensaje(
+            "estadoPassword",
+            "Contraseña válida.",
+            "exito"
+        );
+    }
+}
+
+function validarConfirmacion() {
+    const password = inputPassword.value;
+    const confirm = inputConfirm.value;
+
+    if (confirm.length === 0) {
+        limpiarMensaje("estadoConfirm");
+        return;
+    }
+
+    if (password === confirm) {
+        mostrarMensaje(
+            "estadoConfirm",
+            "Las contraseñas coinciden.",
+            "exito"
+        );
+    } else {
+        mostrarMensaje(
+            "estadoConfirm",
+            "Las contraseñas no coinciden.",
+            "error"
+        );
+    }
+}
+
+// ============================================================
+// 8. PROCESAR REGISTRO
+// ============================================================
+function procesarRegistro() {
+    const nombre = inputNombre.value.trim();
+    const apellido = inputApellido.value.trim();
+    const email = inputEmail.value.trim();
+    const password = inputPassword.value;
+    const confirm = inputConfirm.value;
+    const fechaNacimiento = inputFecha.value;
+    const nacionalidad = selectNacionalidad.value;
+    const terminos = checkboxTerminos.checked;
+
+    // VALIDACIONES
+    if (nombre === "" || apellido === "" || email === "" || password === "" || confirm === "") {
+        Swal.fire({
+            icon: "warning",
+            title: "Campos incompletos",
+            text: "Todos los campos son obligatorios."
+        });
+        return;
+    }
+
+    if (nacionalidad === "" || nacionalidad === "Cargando países..." || nacionalidad === "Error al cargar países") {
+        Swal.fire({
+            icon: "warning",
+            title: "Nacionalidad requerida",
+            text: "Selecciona tu país de origen de la lista."
+        });
+        return;
+    }
+
+    if (password !== confirm) {
+        Swal.fire({
+            icon: "warning",
+            title: "Contraseñas no coinciden",
+            text: "Verifica que ambas contraseñas sean iguales."
+        });
+        return;
+    }
+
+    if (password.length < 8) {
+        Swal.fire({
+            icon: "warning",
+            title: "Contraseña muy corta",
+            text: "La contraseña debe tener al menos 8 caracteres."
+        });
+        return;
     }
 
     if (!terminos) {
-      Swal.fire("Términos y condiciones", "Debes aceptar los términos para continuar.", "warning");
-      return;
+        Swal.fire({
+            icon: "warning",
+            title: "Acepta los términos",
+            text: "Debes aceptar los términos y condiciones para continuar."
+        });
+        return;
+    }
+
+    if (!fechaNacimiento) {
+        Swal.fire({
+            icon: "warning",
+            title: "Fecha de nacimiento requerida",
+            text: "Ingresa tu fecha de nacimiento."
+        });
+        return;
     }
 
     const usuarios = DaatStorage.obtener("usuarios");
-
-    const existe = usuarios.some(function (usuario) {
-      return usuario.email.toLowerCase() === email.toLowerCase();
+    const existe = usuarios.some(function(usuario) {
+        return usuario.email.toLowerCase() === email.toLowerCase();
     });
 
     if (existe) {
-      Swal.fire("Correo ya registrado", "Ya existe una cuenta con este correo electrónico.", "error");
-      return;
+        Swal.fire({
+            icon: "error",
+            title: "Correo ya registrado",
+            text: "Ya existe una cuenta con este correo electrónico."
+        });
+        return;
     }
 
+    // CREAR NUEVO USUARIO
     const nuevoUsuario = {
-      id: DaatStorage.nuevoId(usuarios),
-      nombre: nombre,
-      apellido: apellido,
-      email: email,
-      password: password,
-      fechaNacimiento: fechaNacimiento,
-      nacionalidad: nacionalidad,
-      biografia: "Nuevo miembro de la comunidad Daat Devotional.",
-      avatar: "../../imagenes/Perfil.png",
-      fechaRegistro: new Date().toISOString().substring(0, 10),
-      estado: "activo"
+        id: DaatStorage.nuevoId(usuarios),
+        nombre: nombre,
+        apellido: apellido,
+        email: email,
+        password: password,
+        fechaNacimiento: fechaNacimiento,
+        nacionalidad: nacionalidad,
+        biografia: "Nuevo miembro de la comunidad Daat Devotional.",
+        avatar: "../../imagenes/Perfil.png",
+        fechaRegistro: new Date().toISOString().substring(0, 10),
+        estado: "activo"
     };
 
     usuarios.push(nuevoUsuario);
     DaatStorage.guardar("usuarios", usuarios);
 
     Swal.fire({
-      title: "¡Registro exitoso!",
-      text: "Bienvenido/a a Daat Devotional, " + nombre + ".",
-      icon: "success",
-      confirmButtonText: "Iniciar sesión"
-    }).then(function () {
-      window.location.href = "login.html";
+        title: "¡Registro exitoso!",
+        text: "Bienvenido/a a Daat Devotional, " + nombre + ".",
+        icon: "success",
+        confirmButtonText: "Iniciar sesión"
+    }).then(function() {
+        window.location.href = "login.html";
     });
-  });
+}
+
+// ============================================================
+// 9. UTILIDADES
+// ============================================================
+function notificar(mensaje, tipo) {
+    const colores = {
+        exito: "#198754",
+        error: "#dc3545",
+        info: "#0d6efd"
+    };
+
+    if (typeof Toastify !== 'undefined') {
+        Toastify({
+            text: mensaje,
+            duration: 2800,
+            gravity: "top",
+            position: "right",
+            style: { background: colores[tipo] || colores.info }
+        }).showToast();
+    } else {
+        console.log(mensaje);
+    }
 }
